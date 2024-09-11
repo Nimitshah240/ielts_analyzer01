@@ -160,3 +160,10 @@ app.listen(PORT, () => {
 
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+app.get('/apitester', (req, res) => {
+
+    let res = 'abc';
+    res.json(res);
+
+});
