@@ -1,0 +1,170 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='./index.css'>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='./index.js'></script>
+    <script src='../signin.js'></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+</head>
+
+<body onload="connectedCallback(event)">
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+    <div class="circle5"></div>
+    <div class="circle6"></div>
+
+    <main>
+        <div class="header glass">
+            <div class="logo">
+                <h1 class="companylogo"> IELTS <span style="color: #106eea;">Analyzer.</span></h1>
+                <h5 class="descrip">Score more than 8 bands</h5>
+            </div>
+            <div class="details">
+                <a class="navbartransition" href="#overview">Overall</a>
+                <a class="navbartransition" href="#contact">Contact Us</a>
+                <i class="fa fa-google g-icon" id="not-log" style="font-size: 30px;" onclick="sigin()"
+                    aria-hidden="true"></i>
+                <img id="login-img" class="login-img" onclick="signout()" />
+            </div>
+        </div>
+        <div class="body-section">
+            <div class="glass first-box box slide-up">
+                <div class="intro-img">
+                    <img src="../Asset/IELTS_Img.png" class="intro" alt="">
+                </div>
+                <div class="intro-txt">
+                    <div class="tag-line">
+                        <p>
+                            Begin your Ielts journey with IELTS Analyzer
+                        </p>
+                    </div>
+                    <div class="buttons">
+                        <button class="button-63" onclick="setHref(event)" role="button" id="data">Data</button>
+                        <button class="button-63" onclick="setHref(event)" role="button"
+                            id="dashboard">Dashboard</button>
+                        <button class="button-63" onclick="setHref(event)" role="button" id="tips">Tips</button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="glass second-box box" id="overview">
+                <div class="intro-txt">
+                    <div class="highlights-heading">
+                        <h1> Reading </h1>
+                    </div>
+                    <div class="highlights-containers">
+                        <div class="highlight-container-1">
+                            <div class="highlights-container">
+                                <i class="fa fa-percent highlight-icon contact-icon" aria-hidden="true"></i>
+                                <p class="" id="reading-band"> - Band</p>
+                                <h4 class=""> Avg. Score</h4>
+                            </div>
+                        </div>
+                        <div class="highlight-container-2">
+                            <div class="highlights-container">
+                                <i class="fa fa-file-text highlight-icon contact-icon div-2-icon"
+                                    aria-hidden="true"></i>
+                                <p class="" id="count-reading"> - Exam</p>
+                                <h4 class=""> Total exams</h4>
+                            </div>
+                            <div class="highlights-container">
+                                <i class="fa fa-tachometer highlight-icon contact-icon" aria-hidden="true"></i>
+                                <p class="" id="question-count-reading"> - Question</p>
+                                <h4 class=""> Total questions</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-img">
+                    <img src="../Asset/reading.png" class="reading" alt="">
+                </div>
+            </div>
+            <div class="glass third-box box">
+                <div class="intro-img">
+                    <img src="../Asset/listening.png" class="listening" alt="">
+                </div>
+                <div class="intro-txt">
+                    <div class="highlights-heading">
+                        <h1> Listening </h1>
+                    </div>
+                    <div class="highlights-containers">
+                        <div class="highlight-container-1">
+                            <div class="highlights-container">
+                                <i class="fa fa-percent highlight-icon contact-icon" aria-hidden="true"></i>
+                                <p class="" id="listening-band"> - Band</p>
+                                <h4 class=""> Avg. Score</h4>
+                            </div>
+                        </div>
+                        <div class="highlight-container-2">
+                            <div class="highlights-container">
+                                <i class="fa fa-file-text highlight-icon contact-icon div-2-icon"
+                                    aria-hidden="true"></i>
+                                <p class="" id="count-listening"> - Exam</p>
+                                <h4 class=""> Total exams</h4>
+                            </div>
+                            <div class="highlights-container">
+                                <i class="fa fa-tachometer highlight-icon contact-icon" aria-hidden="true"></i>
+                                <p class="" id="question-count-listening"> - Question</p>
+                                <h4 class=""> Total questions</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="glass contact-us" id="contact">
+            <div class="contact-title"> Contact Us</div>
+            <div class="contact-details">
+                <div class="contact-detail">
+                    <div style="font-weight:bold"> Email </div>
+                    <div> nimitshah240@gmail.com </div>
+                    <div style="font-weight:bold"> Phone </div>
+                    <div> +91 6353756701</div>
+                    <div style="font-weight:bold"> Address </div>
+                    <div> 123 xyz building, abc district, ABC state, India, 380013</div>
+                    <div style="" class="contact-tagline">We'd love to hear from you if you have any
+                        questions, suggestions or
+                        just want to say hello
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <input type="text" placeholder="Name*" class="text-field" id="">
+                    <input type="email" placeholder="Email*" class="text-field" id="">
+                    <textarea type="text-area" placeholder="Type your message here" class="desc-field" id=""></textarea>
+                    <button class="button-63 send-button" onclick="sendemail(event)" role="button"
+                        id="data">Send</button>
+
+                </div>
+            </div>
+        </div>
+        <div class=" footer">
+            <div class="copyright">
+                © Copyright GreenBytes. All Rights Reserved.
+            </div>
+            <div class="contact-icons">
+                <a href="mailto:nimitshah240@gmail.com">
+                    <i class="fa fa-envelope-o contact-icon" aria-hidden="true"></i>
+                </a>
+                <a href="https://wa.me/6353756701">
+                    <i class="fa fa-whatsapp contact-icon" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.instagram.com/_nimittt_3000_/">
+                    <i class="fa fa-instagram contact-icon" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/nimit-shah-4623411b8/">
+                    <i class="fa fa-linkedin contact-icon" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

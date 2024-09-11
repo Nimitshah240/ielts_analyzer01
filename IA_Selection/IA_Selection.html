@@ -1,0 +1,63 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='./IA_Selection.css'>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='../index.js'></script>
+    <script src='./IA_Selection.js'></script>
+    <script src='../signin.js'></script>
+</head>
+
+<body onload="connectedCallback(event)">
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <main>
+        <div class="header glass">
+            <div class="logo">
+                <h1 class="companylogo"> IELTS <span style="color: #106eea;">Analyzer.</span></h1>
+                <h5 class="descrip">Score more than 8 bands</h5>
+            </div>
+            <div class="details">
+                <a class="navbartransition" href="../index.html">Home</a>
+                <i class="fa fa-google g-icon" id="not-log" style="font-size: 30px;" onclick="sigin()"
+                    aria-hidden="true"></i>
+                <img id="login-img" class="login-img" onclick="signout()" />
+            </div>
+        </div>
+        <div class="buttons">
+            <a class="slide-left slide-up box glass" href="#" id="Reading" onclick="setHrefs(event)">
+                <i class="fa fa-book fa-3x box-icon" id="Reading" aria-hidden="true"></i>
+                <span class="button-title">Reading</span>
+            </a>
+            <a class="slide-right slide-up box glass" href="#" id="Listening" onclick="setHrefs(event)">
+                <i class="fa fa-headphones fa-3x box-icon" id="Listening" aria-hidden="true"></i>
+                <span class="button-title">Listening</span>
+            </a>
+        </div>
+        <div class=" footer">
+            <div class="copyright">
+                © Copyright GreenBytes. All Rights Reserved.
+            </div>
+            <div class="contact-icons">
+                <a href="mailto:nimitshah240@gmail.com">
+                    <i class="fa fa-envelope-o contact-icon" aria-hidden="true"></i>
+                </a>
+                <a href="https://wa.me/6353756701">
+                    <i class="fa fa-whatsapp contact-icon" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.instagram.com/_nimittt_3000_/">
+                    <i class="fa fa-instagram contact-icon" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/nimit-shah-4623411b8/">
+                    <i class="fa fa-linkedin contact-icon" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
