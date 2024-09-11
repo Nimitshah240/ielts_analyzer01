@@ -187,7 +187,6 @@ function saveexam(event) {
         let exam_date = document.getElementById('examdate').value;
         exam_date = new Date(exam_date);
         exam_date = new Date(exam_date.getTime() - (exam_date.getTimezoneOffset() * 60000)).toISOString();
-        console.log(exam_date, 'er');
         let correct = 0;
         let band = 0;
         if (exam_name == '' || exam_date == '') {
@@ -224,19 +223,17 @@ function saveexam(event) {
             })
                 .then(response => response.json())
                 .then(responseData => {
-                    console.log(responseData);
                 });
             popupclose(event);
         }
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
 function deletequestion(event) {
     try {
         const question_id = event.target.id;
-        console.log(question_id);
 
         fetch(`https://ieltsanalyzer.up.railway.app/api/deleteQuestion?question_id=${question_id}`, {
             method: 'DELETE',

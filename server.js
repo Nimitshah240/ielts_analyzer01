@@ -33,8 +33,6 @@ app.use(express.static('public'));
 app.use(cors());
 
 app.post('/logindata', (req, res) => {
-    console.log('logindata');
-    
     const receivedData = req.body;
     let query = 'SELECT * FROM user WHERE id = ' + receivedData.user_id;
     let res_len;
@@ -68,8 +66,6 @@ app.post('/logindata', (req, res) => {
 });
 
 app.get('/api/examdata', (req, res) => {
-    console.log("api/examdata");
-    
     const user_id = req.query.user_id;
     const module = [];
     if (req.query.module == 'undefined') {
@@ -91,8 +87,6 @@ app.get('/api/examdata', (req, res) => {
 });
 
 app.delete('/api/deleteExam', (req, res) => {
-    console.log("api/deleteExam");
-    
     const exam_id = req.query.exam_id;
     let query = "DELETE FROM exam WHERE id = ?";
 
@@ -113,9 +107,6 @@ app.delete('/api/deleteExam', (req, res) => {
 });
 
 app.post('/api/insertExam', (req, res) => {
-
-    console.log("api/insertExam");
-    
     let exam_id = req.headers.exam_id;
     const receivedData = req.body;
     let exam_query = `INSERT INTO exam (user_id, exam_name, date, module, band) VALUES (${receivedData[0].user_id}, '${receivedData[0].exam_name}', '${receivedData[0].date}', '${receivedData[0].module}', ${receivedData[0].band}) `;
@@ -153,8 +144,6 @@ function questioninsert(receivedData, exam_id) {
 }
 
 app.delete('/api/deleteQuestion', (req, res) => {
-    console.log("api/deleteQuestion");
-    
     const question_id = req.query.question_id;
     let query = "DELETE FROM question WHERE id = ?";
 
