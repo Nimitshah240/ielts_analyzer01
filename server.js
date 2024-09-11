@@ -163,7 +163,7 @@ app.listen(PORT, () => {
 
 app.get('/apitester', (req, res) => {
 
-    let res = 'abc';
-    res.json(res);
+    let ress = 'abc';
+    res.json(ress);
 
 });
