@@ -29,7 +29,6 @@ async function connectedCallback() {
                 .then(response => response.json())
                 .then(responsedata => {
                     responseData = responsedata;
-                    console.log(responseData);
                     responseData.forEach(element => {
                         // FOR CHART 2 and 5
                         if (exammap.has(element.exam_id)) {
@@ -74,7 +73,6 @@ async function connectedCallback() {
                     });
                 })
                 .catch(error => console.error('Error:', error));
-            console.log(exammap);
         });
 
         google.charts.load('current', { 'packages': ['corechart'] });

@@ -5,10 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
         threshold: 0.1 // Trigger when 50% of the div is visible
     };
     const observerCallback = (entries, observer) => {
-        console.log(entries);
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // console.log('is');
                 slideInDiv.classList.add("active");
             }
         });
@@ -77,7 +75,6 @@ async function fetchUserData() {
                     document.getElementById('login-img').style.display = 'block';
                     document.getElementById('login-img').setAttribute('src', responseData.picture);
                     if (document.getElementById("listening-band")) {
-                        console.log('fetch');
                         fetchExamData();
                     }
                 })
