@@ -64,7 +64,7 @@ async function fetchUserData() {
             delete data.family_name;
             delete data.given_name;
 
-            fetch('http://localhost:3000/logindata', {
+            fetch('https://ieltsanalyzer.up.railway.app/logindata', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ async function fetchExamData() {
         let listeningband = [];
         let exammap = new Map();
 
-        fetch(`http://localhost:3000/api/examdata?user_id=${user_id}&module=${module}`)
+        fetch(`https://ieltsanalyzer.up.railway.app/api/examdata?user_id=${user_id}&module=${module}`)
             .then(response => response.json())
             .then(responseData => {
 

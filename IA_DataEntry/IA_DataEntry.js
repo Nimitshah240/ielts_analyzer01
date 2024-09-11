@@ -214,7 +214,7 @@ function saveexam(event) {
                 element.band = band;
             });
 
-            fetch('http://localhost:3000/api/insertExam', {
+            fetch('https://ieltsanalyzer.up.railway.app/api/insertExam', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -238,7 +238,7 @@ function deletequestion(event) {
         const question_id = event.target.id;
         console.log(question_id);
 
-        fetch(`http://localhost:3000/api/deleteQuestion?question_id=${question_id}`, {
+        fetch(`https://ieltsanalyzer.up.railway.app/api/deleteQuestion?question_id=${question_id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

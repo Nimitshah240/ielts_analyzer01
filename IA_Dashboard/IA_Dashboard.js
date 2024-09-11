@@ -25,7 +25,7 @@ async function connectedCallback() {
         signincheck(() => {
             fetchUserData();
 
-            fetch(`http://localhost:3000/api/examdata?user_id=${user_id}&module=${module}`)
+            fetch(`https://ieltsanalyzer.up.railway.app/api/examdata?user_id=${user_id}&module=${module}`)
                 .then(response => response.json())
                 .then(responsedata => {
                     responseData = responsedata;

@@ -40,7 +40,7 @@ function openexam(event) {
 function examData() {
     try {
         const user_id = JSON.parse(localStorage.getItem('user_data')).user_id;
-        fetch(`http://localhost:3000/api/examdata?user_id=${user_id}&module=${module}`)
+        fetch(`https://ieltsanalyzer.up.railway.app/api/examdata?user_id=${user_id}&module=${module}`)
             .then(response => response.json())
             .then(responseData => {
                 question = responseData;
@@ -138,7 +138,7 @@ function deleteexam(event) {
     try {
         let exam_id = event.target.id;
 
-        fetch(`http://localhost:3000/api/deleteExam?exam_id=${exam_id}`, {
+        fetch(`https://ieltsanalyzer.up.railway.app/api/deleteExam?exam_id=${exam_id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
