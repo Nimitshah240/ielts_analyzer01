@@ -8,7 +8,7 @@ function sigin() {
 
         let params = {
             "client_id": "960583894295-h50j910bdioqrmlrargqs6hust6in4ap.apps.googleusercontent.com",
-            "redirect_uri": "http://localhost/IA_Code/index.html",
+            "redirect_uri": "https://ieltsanalyzer.netlify.app",
             "response_type": "token",
             "scope": "https://www.googleapis.com/auth/userinfo.profile",
             "include_granted_scope": 'true',
