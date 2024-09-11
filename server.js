@@ -2,10 +2,10 @@
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root', // replace with your MySQL username
-    password: '', // replace with your MySQL password
-    database: 'ielts_analyser', // replace with your database name
+    host: 'sql301.infinityfree.com',
+    user: 'if0_37292319', // replace with your MySQL username
+    password: 'myPyZkTI9xd', // replace with your MySQL password
+    database: 'if0_37292319_ielts_analyser', // replace with your database name
     port: 3306 // default MySQL port
 });
 
