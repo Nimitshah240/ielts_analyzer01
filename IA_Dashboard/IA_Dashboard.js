@@ -25,11 +25,10 @@ async function connectedCallback() {
         signincheck(() => {
             fetchUserData();
 
-            fetch(`http://localhost:3000/api/examdata?user_id=${user_id}&module=${module}`)
+            fetch(`https://ieltsanalyzer.up.railway.app/api/examdata?user_id=${user_id}&module=${module}`)
                 .then(response => response.json())
                 .then(responsedata => {
                     responseData = responsedata;
-                    console.log(responseData);
                     responseData.forEach(element => {
                         // FOR CHART 2 and 5
                         if (exammap.has(element.exam_id)) {
@@ -74,7 +73,6 @@ async function connectedCallback() {
                     });
                 })
                 .catch(error => console.error('Error:', error));
-            console.log(exammap);
         });
 
         google.charts.load('current', { 'packages': ['corechart'] });

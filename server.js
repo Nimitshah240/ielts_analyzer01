@@ -2,10 +2,10 @@
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
-    host: 'sql12.freesqldatabase.com',
-    user: 'sql12731002', // replace with your MySQL username
-    password: 'hHHiVZ4T2H', // replace with your MySQL password
-    database: 'sql12731002', // replace with your database name
+    host: 'localhost',
+    user: 'root', // replace with your MySQL username
+    password: '', // replace with your MySQL password
+    database: 'ielts_analyser', // replace with your database name
     port: 3306 // default MySQL port
 });
 
@@ -107,7 +107,6 @@ app.delete('/api/deleteExam', (req, res) => {
 });
 
 app.post('/api/insertExam', (req, res) => {
-
     let exam_id = req.headers.exam_id;
     const receivedData = req.body;
     let exam_query = `INSERT INTO exam (user_id, exam_name, date, module, band) VALUES (${receivedData[0].user_id}, '${receivedData[0].exam_name}', '${receivedData[0].date}', '${receivedData[0].module}', ${receivedData[0].band}) `;
@@ -157,13 +156,10 @@ app.delete('/api/deleteQuestion', (req, res) => {
 });
 
 app.listen(PORT, () => {
-
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on https://ieltsanalyzer.up.railway.app${PORT}`);
 });
 
 app.get('/apitester', (req, res) => {
-
     let ress = 'abc';
     res.json(ress);
-
 });

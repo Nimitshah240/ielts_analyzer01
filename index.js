@@ -5,10 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
         threshold: 0.1 // Trigger when 50% of the div is visible
     };
     const observerCallback = (entries, observer) => {
-        console.log(entries);
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // console.log('is');
                 slideInDiv.classList.add("active");
             }
         });
@@ -64,7 +62,7 @@ async function fetchUserData() {
             delete data.family_name;
             delete data.given_name;
 
-            fetch('http://localhost:3000/logindata', {
+            fetch('https://ieltsanalyzer.up.railway.app/logindata', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,7 +75,6 @@ async function fetchUserData() {
                     document.getElementById('login-img').style.display = 'block';
                     document.getElementById('login-img').setAttribute('src', responseData.picture);
                     if (document.getElementById("listening-band")) {
-                        console.log('fetch');
                         fetchExamData();
                     }
                 })
@@ -103,7 +100,7 @@ async function fetchExamData() {
         let listeningband = [];
         let exammap = new Map();
 
-        fetch(`http://localhost:3000/api/examdata?user_id=${user_id}&module=${module}`)
+        fetch(`https://ieltsanalyzer.up.railway.app/api/examdata?user_id=${user_id}&module=${module}`)
             .then(response => response.json())
             .then(responseData => {
 

@@ -42,7 +42,6 @@ async function signincheck(callback) {
                 while (m = regex.exec(location.href)) {
                     params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
                 }
-                window.history.pushState({}, document.title, "/");
 
                 let info = JSON.parse(JSON.stringify(params));
                 access_token = info['access_token'];
@@ -73,6 +72,7 @@ async function signincheck(callback) {
         } else {
             callback();
         }
+        window.history.pushState({}, document.title, "/");
 
     } catch (error) {
         console.error('e', error);
