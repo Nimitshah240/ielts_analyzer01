@@ -165,8 +165,8 @@ function setHref(event) {
         event.target.href = dynamicUrl;
         window.location.href = dynamicUrl;
 
-        document.getElementById("spinner").style.display = 'none';
-        document.getElementById("main").style.display = 'block';
+        // document.getElementById("spinner").style.display = 'none';
+        // document.getElementById("main").style.display = 'block';
     } catch (error) {
         console.error(error);
     }
