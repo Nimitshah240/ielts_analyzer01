@@ -12,6 +12,11 @@ function connectedCallback() {
     sectionsetter();
     signincheck(() => {
         fetchUserData();
+
+        const myEvent = new CustomEvent("spinner", {
+            detail: { message: "false" },
+        });
+        window.dispatchEvent(myEvent);
     });
 }
 
@@ -182,8 +187,10 @@ function getData(event) {
 // To save exam
 function saveexam(event) {
     try {
-        document.getElementById("main").style.display = 'none';
-        document.getElementById("spinner").style.display = 'flex';
+        const myEvent = new CustomEvent("spinner", {
+            detail: { message: "true" },
+        });
+        window.dispatchEvent(myEvent);
 
         let exam_name = document.getElementById('examname').value;
         let exam_date = document.getElementById('examdate').value;
@@ -228,8 +235,6 @@ function saveexam(event) {
                 });
             popupclose(event);
 
-            document.getElementById("spinner").style.display = 'none';
-            document.getElementById("main").style.display = 'block';
         }
     } catch (error) {
         console.error(error);

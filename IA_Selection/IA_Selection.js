@@ -6,6 +6,11 @@ function connectedCallback(event) {
 
         signincheck(() => {
             fetchUserData();
+
+            const myEvent = new CustomEvent("spinner", {
+                detail: { message: "false" },
+            });
+            window.dispatchEvent(myEvent);
         });
 
     } catch (error) {
@@ -16,8 +21,10 @@ function connectedCallback(event) {
 function setHrefs(event) {
     try {
 
-        document.getElementById("main").style.display = 'none';
-        document.getElementById("spinner").style.display = 'flex';
+        const myEvent = new CustomEvent("spinner", {
+            detail: { message: "true" },
+        });
+        window.dispatchEvent(myEvent);
 
         let module = event.target.id;
 
@@ -37,8 +44,6 @@ function setHrefs(event) {
         event.target.href = dynamicUrl;
         window.location.href = dynamicUrl;
 
-        document.getElementById("spinner").style.display = 'none';
-        document.getElementById("main").style.display = 'block';
     } catch (error) {
         console.error(error);
     }

@@ -8,13 +8,21 @@ function connectedCallback() {
     signincheck(() => {
         examData();
         fetchUserData();
+
+        const myEvent = new CustomEvent("spinner", {
+            detail: { message: "false" },
+        });
+        window.dispatchEvent(myEvent);
     });
 
 }
 function setHref(event) {
     try {
-        document.getElementById("main").style.display = 'none';
-        document.getElementById("spinner").style.display = 'flex';
+
+        const myEvent = new CustomEvent("spinner", {
+            detail: { message: "true" },
+        });
+        window.dispatchEvent(myEvent);
 
         var dynamicUrl = '../IA_DataEntry/IA_DataEntry.html?module=' + module;
         event.target.href = dynamicUrl;
@@ -26,8 +34,11 @@ function setHref(event) {
 }
 
 function openexam(event) {
-    document.getElementById("main").style.display = 'none';
-    document.getElementById("spinner").style.display = 'flex';
+
+    const myEvent = new CustomEvent("spinner", {
+        detail: { message: "true" },
+    });
+    window.dispatchEvent(myEvent);
 
     let questions = [];
     question.forEach(element => {
@@ -41,9 +52,6 @@ function openexam(event) {
     var dynamicUrl = '../IA_DataEntry/IA_DataEntry.html?module=' + module + '&tdExam=' + event.target.id;
     event.target.href = dynamicUrl;
     window.location.href = dynamicUrl;
-
-    document.getElementById("spinner").style.display = 'none';
-    document.getElementById("main").style.display = 'block';
 }
 
 function examData() {

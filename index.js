@@ -38,6 +38,11 @@ async function connectedCallback(event) {
     try {
         signincheck(() => {
             fetchUserData();
+
+            const myEvent = new CustomEvent("spinner", {
+                detail: { message: "false" },
+            });
+            window.dispatchEvent(myEvent);
         });
     } catch (error) {
         console.error('e', error);
@@ -150,8 +155,10 @@ function calculateAverage(numbers) {
 function setHref(event) {
     try {
 
-        document.getElementById("main").style.display = 'none';
-        document.getElementById("spinner").style.display = 'flex';
+        const myEvent = new CustomEvent("spinner", {
+            detail: { message: "true" },
+        });
+        window.dispatchEvent(myEvent);
 
         var dynamicUrl;
         let buttonId = event.target.id;
@@ -165,8 +172,6 @@ function setHref(event) {
         event.target.href = dynamicUrl;
         window.location.href = dynamicUrl;
 
-        // document.getElementById("spinner").style.display = 'none';
-        // document.getElementById("main").style.display = 'block';
     } catch (error) {
         console.error(error);
     }
