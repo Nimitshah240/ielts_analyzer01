@@ -25,6 +25,9 @@ async function connectedCallback() {
         signincheck(() => {
             fetchUserData();
 
+            document.getElementById("main").style.display = 'none';
+            document.getElementById("spinner").style.display = 'flex';
+
             fetch(`https://ieltsanalyzer.up.railway.app/api/examdata?user_id=${user_id}&module=${module}`)
                 .then(response => response.json())
                 .then(responsedata => {
@@ -71,6 +74,8 @@ async function connectedCallback() {
                         }
 
                     });
+                    document.getElementById("spinner").style.display = 'none';
+                    document.getElementById("main").style.display = 'block';
                 })
                 .catch(error => console.error('Error:', error));
         });

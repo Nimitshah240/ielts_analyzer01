@@ -66,16 +66,16 @@ function sectionsetter() {
     }
 }
 
-function setHref(event) {
-    try {
+// function setHref(event) {
+//     try {
 
-        var dynamicUrl = '../IA_Listview/IA_Listview.html?module=' + module;
-        event.target.href = dynamicUrl;
-        window.location.href = dynamicUrl;
-    } catch (error) {
-        console.error(error);
-    }
-}
+//         var dynamicUrl = '../IA_Listview/IA_Listview.html?module=' + module;
+//         event.target.href = dynamicUrl;
+//         window.location.href = dynamicUrl;
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 
 function popupopen(event) {
     try {
@@ -182,6 +182,8 @@ function getData(event) {
 // To save exam
 function saveexam(event) {
     try {
+        document.getElementById("main").style.display = 'none';
+        document.getElementById("spinner").style.display = 'flex';
 
         let exam_name = document.getElementById('examname').value;
         let exam_date = document.getElementById('examdate').value;
@@ -225,6 +227,9 @@ function saveexam(event) {
                 .then(responseData => {
                 });
             popupclose(event);
+
+            document.getElementById("spinner").style.display = 'none';
+            document.getElementById("main").style.display = 'block';
         }
     } catch (error) {
         console.error(error);

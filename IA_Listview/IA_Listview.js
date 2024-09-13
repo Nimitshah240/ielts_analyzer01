@@ -13,6 +13,9 @@ function connectedCallback() {
 }
 function setHref(event) {
     try {
+        document.getElementById("main").style.display = 'none';
+        document.getElementById("spinner").style.display = 'flex';
+
         var dynamicUrl = '../IA_DataEntry/IA_DataEntry.html?module=' + module;
         event.target.href = dynamicUrl;
         window.location.href = dynamicUrl;
@@ -23,6 +26,9 @@ function setHref(event) {
 }
 
 function openexam(event) {
+    document.getElementById("main").style.display = 'none';
+    document.getElementById("spinner").style.display = 'flex';
+
     let questions = [];
     question.forEach(element => {
         if (element.exam_id == event.target.id) {
@@ -35,6 +41,9 @@ function openexam(event) {
     var dynamicUrl = '../IA_DataEntry/IA_DataEntry.html?module=' + module + '&tdExam=' + event.target.id;
     event.target.href = dynamicUrl;
     window.location.href = dynamicUrl;
+
+    document.getElementById("spinner").style.display = 'none';
+    document.getElementById("main").style.display = 'block';
 }
 
 function examData() {
