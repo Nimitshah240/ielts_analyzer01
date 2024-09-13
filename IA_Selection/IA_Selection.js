@@ -15,6 +15,10 @@ function connectedCallback(event) {
 
 function setHrefs(event) {
     try {
+
+        document.getElementById("main").style.display = 'none';
+        document.getElementById("spinner").style.display = 'flex';
+
         let module = event.target.id;
 
         if (type == 'dashboard') {
@@ -28,10 +32,13 @@ function setHrefs(event) {
             dynamicUrl = dynamicUrl + '?module=Listening';
         }
 
-        setTimeout(function () {
-            event.target.href = dynamicUrl;
-            window.location.href = dynamicUrl;
-        }, 500);
+        // setTimeout(function () {
+        // }, 500);
+        event.target.href = dynamicUrl;
+        window.location.href = dynamicUrl;
+
+        document.getElementById("spinner").style.display = 'none';
+        document.getElementById("main").style.display = 'block';
     } catch (error) {
         console.error(error);
     }

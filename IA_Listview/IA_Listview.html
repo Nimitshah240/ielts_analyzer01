@@ -13,51 +13,58 @@
 </head>
 
 <body onload="connectedCallback()">
-    <div class="header">
-        <div class="logo">
-            <p class="companylogo"> IELTS <span style="color: #106eea;">Analyzer.</span></p>
-            <p>Score more than 8 bands</p>
-        </div>
-        <div class="details">
-            <a class="navbartransition" href="#" onclick="setHref(event)">New</a>
-            <a class="navbartransition" href="../index.html">Home</a>
-            <i class="fa fa-google g-icon" id="not-log" style="font-size: 30px;" onclick="sigin()"
-                aria-hidden="true"></i>
-            <img id="login-img" class="login-img" onclick="signout()" />
-        </div>
-    </div>
 
-    <div class="body_section">
-        <div class="dataheader">
-            <div class="tableheader">
-                <div class="column index"> Index </div>
-                <div class="column examname"> Exam </div>
-                <div class="column date"> Exam Date </div>
-                <div class="column total"> Total </div>
-                <div class="column section"> Section 1</div>
-                <div class="column section"> Section 2</div>
-                <div class="column section"> Section 3</div>
-                <div class="column section"> Section 4</div>
-                <div class="column delete"> Delete</div>
+    <!-- Spinner -->
+    <iframe src="../IA_Spinner/IA_Spinner.html" id="spinner" class="spinner" frameborder="0"></iframe>
+    <!-- Spinner -->
+
+    <main id="main">
+        <div class="header">
+            <div class="logo">
+                <p class="companylogo"> IELTS <span style="color: #106eea;">Analyzer.</span></p>
+                <p>Score more than 8 bands</p>
+            </div>
+            <div class="details">
+                <a class="navbartransition" href="#" onclick="setHref(event)">New</a>
+                <a class="navbartransition" href="../index.html">Home</a>
+                <i class="fa fa-google g-icon" id="not-log" style="font-size: 30px;" onclick="sigin()"
+                    aria-hidden="true"></i>
+                <img id="login-img" class="login-img" onclick="signout()" />
             </div>
         </div>
-        <div class="list">
-            <div class="table" id="table">
-                <!-- Data will show here using js  -->
+
+        <div class="body_section">
+            <div class="dataheader">
+                <div class="tableheader">
+                    <div class="column index"> Index </div>
+                    <div class="column examname"> Exam </div>
+                    <div class="column date"> Exam Date </div>
+                    <div class="column total"> Total </div>
+                    <div class="column section"> Section 1</div>
+                    <div class="column section"> Section 2</div>
+                    <div class="column section"> Section 3</div>
+                    <div class="column section"> Section 4</div>
+                    <div class="column delete"> Delete</div>
+                </div>
+            </div>
+            <div class="list">
+                <div class="table" id="table">
+                    <!-- Data will show here using js  -->
+                </div>
             </div>
         </div>
-    </div>
-    <div class="contact" id="contact">
-        <div class="contact-icons">
-            <i class="fa fa-envelope-o contact-icon" aria-hidden="true"></i>
-            <i class="fa fa-whatsapp contact-icon" aria-hidden="true"></i>
-            <i class="fa fa-instagram contact-icon" aria-hidden="true"></i>
-            <i class="fa fa-linkedin contact-icon" aria-hidden="true"></i>
+        <div class="contact" id="contact">
+            <div class="contact-icons">
+                <i class="fa fa-envelope-o contact-icon" aria-hidden="true"></i>
+                <i class="fa fa-whatsapp contact-icon" aria-hidden="true"></i>
+                <i class="fa fa-instagram contact-icon" aria-hidden="true"></i>
+                <i class="fa fa-linkedin contact-icon" aria-hidden="true"></i>
+            </div>
+            <div class="copyrights">
+                © Copyright GreenBytes. All Rights Reserved.
+            </div>
         </div>
-        <div class="copyrights">
-            © Copyright GreenBytes. All Rights Reserved.
-        </div>
-    </div>
+    </main>
 </body>
 
 </html>
