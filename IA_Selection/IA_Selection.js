@@ -20,13 +20,13 @@ function connectedCallback(event) {
 
 function setHrefs(event) {
     try {
+        let module = event.target.id;
 
         const myEvent = new CustomEvent("spinner", {
             detail: { message: "true" },
         });
         window.dispatchEvent(myEvent);
 
-        let module = event.target.id;
 
         if (type == 'dashboard') {
             dynamicUrl = '../IA_Dashboard/IA_Dashboard.html';

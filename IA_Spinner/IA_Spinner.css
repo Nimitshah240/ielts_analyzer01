@@ -1,5 +1,16 @@
 /* Spinner */
 
+
+.spinners {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .lds-roller,
 .lds-roller div,
 .lds-roller div:after {
@@ -109,16 +120,6 @@
     100% {
         transform: rotate(360deg);
     }
-}
-
-.spinner {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 /* Spinner */
