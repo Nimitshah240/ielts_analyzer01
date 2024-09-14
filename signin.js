@@ -36,17 +36,17 @@ async function signincheck(callback) {
             let access_token = '';
             if (window.location.href.includes('#')) {
                 console.log("#");
-                window.history.pushState({}, document.title, "/");
                 let params = {}
                 let regex = /([^&=]+)=([^&]*)/g, m
-
+                
                 while (m = regex.exec(location.href)) {
                     params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
                 }
-
+                
                 let info = JSON.parse(JSON.stringify(params));
                 access_token = info['access_token'];
                 localStorage.setItem("authInfo", info['access_token']);
+                window.history.pushState({}, document.title, "/");
             }
 
             if (access_token != '') {
