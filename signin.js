@@ -38,11 +38,11 @@ async function signincheck(callback) {
                 console.log("#");
                 let params = {}
                 let regex = /([^&=]+)=([^&]*)/g, m
-                
+
                 while (m = regex.exec(location.href)) {
                     params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
                 }
-                
+
                 let info = JSON.parse(JSON.stringify(params));
                 access_token = info['access_token'];
                 localStorage.setItem("authInfo", info['access_token']);
@@ -70,8 +70,15 @@ async function signincheck(callback) {
 
                         const data = JSON.parse(localStorage.getItem('user_data'));
                         console.log(JSON.stringify(data));
-                        
+
                         if (data) {
+                            
+                            let today = new Date();
+                            let year = today.getFullYear();
+                            let month = ('0' + (today.getMonth() + 1)).slice(-2);
+                            let day = ('0' + today.getDate()).slice(-2);
+                            today = `${year}-${month}-${day}`;
+
                             data.fl_date = today;
                             data.ll_date = today;
                             data.email = undefined;    // remove if you get email from the first google login 

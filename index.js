@@ -49,15 +49,9 @@ async function connectedCallback(event) {
 
 async function fetchUserData() {
     try {
-        let today = new Date();
-        let year = today.getFullYear();
-        let month = ('0' + (today.getMonth() + 1)).slice(-2);
-        let day = ('0' + today.getDate()).slice(-2);
-        today = `${year}-${month}-${day}`;
-
         const data = JSON.parse(localStorage.getItem('user_data'));
-        console.log(JSON.stringify(data));
-        
+        console.log('n', JSON.stringify(data));
+
         if (data) {
             document.getElementById('not-log').style.display = 'none';
             document.getElementById('login-img').style.display = 'block';
