@@ -1,5 +1,7 @@
 try {
     window.addEventListener("spinner", (event) => {
+        console.log(event.detail.message);
+        
         if (event.detail.message == 'true') {
             document.getElementById("spinner").style.display = 'flex';
             document.getElementById("main").style.display = 'none';
