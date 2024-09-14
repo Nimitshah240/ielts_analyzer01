@@ -3,12 +3,6 @@ const urlSearchParams = new URLSearchParams(window.location.search);
 const type = urlSearchParams.get('type');
 function connectedCallback(event) {
     try {
-
-        const myEvent = new CustomEvent("spinner", {
-            detail: { message: false },
-        });
-        window.dispatchEvent(myEvent);
-
         signincheck(() => {
             fetchUserData();
         });
@@ -22,12 +16,6 @@ function setHrefs(event) {
     try {
         let module = event.target.id;
 
-        const myEvent = new CustomEvent("spinner", {
-            detail: { message: true },
-        });
-        window.dispatchEvent(myEvent);
-
-
         if (type == 'dashboard') {
             dynamicUrl = '../IA_Dashboard/IA_Dashboard.html';
         } else if (type == 'data') {
@@ -38,9 +26,6 @@ function setHrefs(event) {
         } else {
             dynamicUrl = dynamicUrl + '?module=Listening';
         }
-
-        // setTimeout(function () {
-        // }, 500);
         event.target.href = dynamicUrl;
         window.location.href = dynamicUrl;
 
@@ -48,3 +33,15 @@ function setHrefs(event) {
         console.error(error);
     }
 }
+
+window.addEventListener("beforeunload", function (event) {
+    console.log("Page is about to be unloaded...");
+    document.getElementById("spinner").style.display = 'flex';
+    document.getElementById("main").style.display = 'none';
+});
+
+window.addEventListener("unload", function () {
+    document.getElementById("spinner").style.display = 'none';
+    document.getElementById("main").style.display = 'block';
+    console.log("Page is being unloaded...");
+});

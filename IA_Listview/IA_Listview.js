@@ -8,21 +8,11 @@ function connectedCallback() {
     signincheck(() => {
         examData();
         fetchUserData();
-
-        const myEvent = new CustomEvent("spinner", {
-            detail: { message: "false" },
-        });
-        window.dispatchEvent(myEvent);
     });
 
 }
 function setHref(event) {
     try {
-
-        const myEvent = new CustomEvent("spinner", {
-            detail: { message: "true" },
-        });
-        window.dispatchEvent(myEvent);
 
         var dynamicUrl = '../IA_DataEntry/IA_DataEntry.html?module=' + module;
         event.target.href = dynamicUrl;
@@ -34,11 +24,6 @@ function setHref(event) {
 }
 
 function openexam(event) {
-
-    const myEvent = new CustomEvent("spinner", {
-        detail: { message: "true" },
-    });
-    window.dispatchEvent(myEvent);
 
     let questions = [];
     question.forEach(element => {
@@ -173,3 +158,15 @@ function deleteexam(event) {
         console.error(error);
     }
 }
+
+window.addEventListener("beforeunload", function (event) {
+    console.log("Page is about to be unloaded...");
+    document.getElementById("spinner").style.display = 'flex';
+    document.getElementById("main").style.display = 'none';
+});
+
+window.addEventListener("unload", function () {
+    document.getElementById("spinner").style.display = 'none';
+    document.getElementById("main").style.display = 'block';
+    console.log("Page is being unloaded...");
+});

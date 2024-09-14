@@ -39,12 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function connectedCallback(event) {
     try {
-
-        const myEvent = new CustomEvent("spinner", {
-            detail: { message: false },
-        });
-        window.dispatchEvent(myEvent);
-
         signincheck(() => {
             fetchUserData();
         });
@@ -159,11 +153,6 @@ function calculateAverage(numbers) {
 function setHref(event) {
     try {
 
-        const myEvent = new CustomEvent("spinner", {
-            detail: { message: true },
-        });
-        window.dispatchEvent(myEvent);
-
         var dynamicUrl;
         let buttonId = event.target.id;
 
@@ -200,15 +189,14 @@ function sendemail(params) {
 
 }
 
-try {
-    window.addEventListener("allpages", (event) => {
+window.addEventListener("beforeunload", function (event) {
+    console.log("Page is about to be unloaded...");
+    document.getElementById("spinner").style.display = 'flex';
+    document.getElementById("main").style.display = 'none';
+});
 
-        if (event.detail.message == false) {
-            document.getElementById("spinner").style.display = 'none';
-            document.getElementById("main").style.display = 'block';
-        }
-    });
-} catch (error) {
-    console.log('allpages', error);
-
-}
+window.addEventListener("unload", function () {
+    document.getElementById("spinner").style.display = 'none';
+    document.getElementById("main").style.display = 'block';
+    console.log("Page is being unloaded...");
+});

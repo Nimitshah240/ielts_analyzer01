@@ -25,11 +25,6 @@ async function connectedCallback() {
         signincheck(() => {
             fetchUserData();
 
-            const myEvent = new CustomEvent("spinner", {
-                detail: { message: "true" },
-            });
-            window.dispatchEvent(myEvent);
-
             fetch(`https://ieltsanalyzer.up.railway.app/api/examdata?user_id=${user_id}&module=${module}`)
                 .then(response => response.json())
                 .then(responsedata => {
@@ -76,11 +71,6 @@ async function connectedCallback() {
                         }
 
                     });
-
-                    const myEvent = new CustomEvent("spinner", {
-                        detail: { message: "false" },
-                    });
-                    window.dispatchEvent(myEvent);
                 })
                 .catch(error => console.error('Error:', error));
         });
@@ -532,3 +522,15 @@ function chart9() {
     chart.draw(data, options);
 
 }
+
+window.addEventListener("beforeunload", function (event) {
+    console.log("Page is about to be unloaded...");
+    document.getElementById("spinner").style.display = 'flex';
+    document.getElementById("main").style.display = 'none';
+});
+
+window.addEventListener("unload", function () {
+    document.getElementById("spinner").style.display = 'none';
+    document.getElementById("main").style.display = 'block';
+    console.log("Page is being unloaded...");
+});

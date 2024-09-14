@@ -12,11 +12,6 @@ function connectedCallback() {
     sectionsetter();
     signincheck(() => {
         fetchUserData();
-
-        const myEvent = new CustomEvent("spinner", {
-            detail: { message: "false" },
-        });
-        window.dispatchEvent(myEvent);
     });
 }
 
@@ -187,11 +182,6 @@ function getData(event) {
 // To save exam
 function saveexam(event) {
     try {
-        const myEvent = new CustomEvent("spinner", {
-            detail: { message: "true" },
-        });
-        window.dispatchEvent(myEvent);
-
         let exam_name = document.getElementById('examname').value;
         let exam_date = document.getElementById('examdate').value;
         exam_date = new Date(exam_date);
@@ -272,3 +262,15 @@ function deletequestion(event) {
     }
 
 }
+
+window.addEventListener("beforeunload", function (event) {
+    console.log("Page is about to be unloaded...");
+    document.getElementById("spinner").style.display = 'flex';
+    document.getElementById("main").style.display = 'none';
+});
+
+window.addEventListener("unload", function () {
+    document.getElementById("spinner").style.display = 'none';
+    document.getElementById("main").style.display = 'block';
+    console.log("Page is being unloaded...");
+});
