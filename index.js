@@ -177,3 +177,15 @@ window.addEventListener("unload", function () {
     document.getElementById("main").style.display = 'block';
     console.log("Page is being unloaded...");
 });
+
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        // Page is about to be unloaded or hidden
+        document.getElementById("spinner").style.display = 'none';
+        document.getElementById("main").style.display = 'block';
+        console.log("Page is being hidden/unloaded...");
+    } else {
+        // Page is visible
+        console.log("Page is visible again.");
+    }
+});
