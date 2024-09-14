@@ -4,13 +4,13 @@ const type = urlSearchParams.get('type');
 function connectedCallback(event) {
     try {
 
+        const myEvent = new CustomEvent("spinner", {
+            detail: { message: false },
+        });
+        window.dispatchEvent(myEvent);
+
         signincheck(() => {
             fetchUserData();
-
-            const myEvent = new CustomEvent("spinner", {
-                detail: { message: "false" },
-            });
-            window.dispatchEvent(myEvent);
         });
 
     } catch (error) {
@@ -23,7 +23,7 @@ function setHrefs(event) {
         let module = event.target.id;
 
         const myEvent = new CustomEvent("spinner", {
-            detail: { message: "true" },
+            detail: { message: true },
         });
         window.dispatchEvent(myEvent);
 

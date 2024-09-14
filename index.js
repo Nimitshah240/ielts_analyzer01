@@ -1,48 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
     const slideInDiv = document.querySelector(".second-box");
+    if (slideInDiv != null) {
+        const observerOptions = {
+            threshold: 0.1 // Trigger when 50% of the div is visible
+        };
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    slideInDiv.classList.add("active");
+                }
+            });
+        };
 
-    const observerOptions = {
-        threshold: 0.1 // Trigger when 50% of the div is visible
-    };
-    const observerCallback = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                slideInDiv.classList.add("active");
-            }
-        });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    observer.observe(slideInDiv);
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        observer.observe(slideInDiv);
+    }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
     const slideInDiv1 = document.querySelector(".third-box");
+    if (slideInDiv1 != null) {
+        const observerOptions = {
+            threshold: 0.27 // Trigger when 50% of the div is visible
+        };
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    slideInDiv1.classList.add("active");
+                }
+            });
+        };
 
-    const observerOptions = {
-        threshold: 0.27 // Trigger when 50% of the div is visible
-    };
-    const observerCallback = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                slideInDiv1.classList.add("active");
-            }
-        });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    observer.observe(slideInDiv1);
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        observer.observe(slideInDiv1);
+    }
 });
+
 
 async function connectedCallback(event) {
     try {
+
+        const myEvent = new CustomEvent("spinner", {
+            detail: { message: false },
+        });
+        window.dispatchEvent(myEvent);
+
         signincheck(() => {
             fetchUserData();
-
-            const myEvent = new CustomEvent("spinner", {
-                detail: { message: "false" },
-            });
-            window.dispatchEvent(myEvent);
         });
     } catch (error) {
         console.error('e', error);
@@ -156,7 +160,7 @@ function setHref(event) {
     try {
 
         const myEvent = new CustomEvent("spinner", {
-            detail: { message: "true" },
+            detail: { message: true },
         });
         window.dispatchEvent(myEvent);
 
@@ -193,5 +197,18 @@ function sendemail(params) {
     } catch (error) {
         console.error(error);
     }
+
+}
+
+try {
+    window.addEventListener("allpages", (event) => {
+
+        if (event.detail.message == false) {
+            document.getElementById("spinner").style.display = 'none';
+            document.getElementById("main").style.display = 'block';
+        }
+    });
+} catch (error) {
+    console.log('allpages', error);
 
 }
