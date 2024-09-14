@@ -57,31 +57,12 @@ async function fetchUserData() {
 
         const data = JSON.parse(localStorage.getItem('user_data'));
         if (data) {
-            data.fl_date = today;
-            data.ll_date = today;
-            data.email = undefined;    // remove if you get email from the first google login 
-            data.location = undefined; // remove if you get location from the first google login
-
-            delete data.family_name;
-            delete data.given_name;
-
-            fetch('https://ieltsanalyzer.up.railway.app/logindata', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-                .then(response => response.json())
-                .then(responseData => {
-                    document.getElementById('not-log').style.display = 'none';
-                    document.getElementById('login-img').style.display = 'block';
-                    document.getElementById('login-img').setAttribute('src', responseData.picture);
-                    if (document.getElementById("listening-band")) {
-                        fetchExamData();
-                    }
-                })
-                .catch(error => console.error('Error:', error.message));
+            document.getElementById('not-log').style.display = 'none';
+            document.getElementById('login-img').style.display = 'block';
+            document.getElementById('login-img').setAttribute('src', data.picture);
+            if (document.getElementById("listening-band")) {
+                fetchExamData();
+            }
         }
 
     } catch (error) {

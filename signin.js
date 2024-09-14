@@ -35,7 +35,8 @@ async function signincheck(callback) {
         if (localStorage.getItem('user_data') == null) {
             let access_token = '';
             if (window.location.href.includes('#')) {
-
+                console.log("#");
+                window.history.pushState({}, document.title, "/");
                 let params = {}
                 let regex = /([^&=]+)=([^&]*)/g, m
 
@@ -66,14 +67,36 @@ async function signincheck(callback) {
                         info.user_id = info.sub;
                         delete info.sub;
                         localStorage.setItem('user_data', JSON.stringify(info));
+
+                        const data = JSON.parse(localStorage.getItem('user_data'));
+                        if (data) {
+                            data.fl_date = today;
+                            data.ll_date = today;
+                            data.email = undefined;    // remove if you get email from the first google login 
+                            data.location = undefined; // remove if you get location from the first google login
+
+                            delete data.family_name;
+                            delete data.given_name;
+                            console.log('post login data');
+
+                            fetch('https://ieltsanalyzer.up.railway.app/logindata', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(data),
+                            })
+                                .then(response => response.json())
+                                .then(responseData => { })
+                                .catch(error => console.error('Error:', error.message));
+                        }
+
                         callback();
                     });
             }
         } else {
             callback();
         }
-        // window.history.pushState({}, document.title, "/");
-
     } catch (error) {
         console.error('e', error);
     }
