@@ -56,6 +56,8 @@ async function fetchUserData() {
         today = `${year}-${month}-${day}`;
 
         const data = JSON.parse(localStorage.getItem('user_data'));
+        console.log(JSON.stringify(data));
+        
         if (data) {
             document.getElementById('not-log').style.display = 'none';
             document.getElementById('login-img').style.display = 'block';

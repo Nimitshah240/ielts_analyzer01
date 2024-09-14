@@ -69,6 +69,8 @@ async function signincheck(callback) {
                         localStorage.setItem('user_data', JSON.stringify(info));
 
                         const data = JSON.parse(localStorage.getItem('user_data'));
+                        console.log(JSON.stringify(data));
+                        
                         if (data) {
                             data.fl_date = today;
                             data.ll_date = today;
