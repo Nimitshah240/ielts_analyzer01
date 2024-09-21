@@ -22,9 +22,6 @@ async function connectedCallback() {
     try {
         createToast('warning', 'Page is currently underdevelop');
 
-        if (!user_id) {
-            createToast('error', 'Please login first')
-        }
         signincheck(() => {
             fetchUserData();
 
