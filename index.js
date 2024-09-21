@@ -43,15 +43,14 @@ async function connectedCallback(event) {
             fetchUserData();
         });
     } catch (error) {
-        console.error('e', error);
+        createToast('error', 'Error while loading : ' + error.message);
     }
 }
 
 async function fetchUserData() {
     try {
-        const data = JSON.parse(localStorage.getItem('user_data'));
-        console.log('n', JSON.stringify(data));
 
+        const data = JSON.parse(localStorage.getItem('user_data'));
         if (data) {
             document.getElementById('not-log').style.display = 'none';
             document.getElementById('login-img').style.display = 'block';
@@ -62,13 +61,12 @@ async function fetchUserData() {
         }
 
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while fetching user data : ' + error.message);
     }
 }
 
 async function fetchExamData() {
     try {
-
         const user_data = JSON.parse(localStorage.getItem('user_data'));
         const user_id = user_data.user_id;
         const module = undefined;
@@ -110,10 +108,10 @@ async function fetchExamData() {
                 document.getElementById("count-listening").innerHTML = listening_exam_count + ' Exam';
                 document.getElementById("count-reading").innerHTML = reading_exam_count + ' Exam';
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => createToast('error', 'Error while fetching exam data : ' + error.message));
 
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while fetching exam data : ' + error.message);
     }
 }
 
@@ -143,7 +141,7 @@ function setHref(event) {
         window.location.href = dynamicUrl;
 
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while redirecting : ' + error.message);
     }
 }
 
@@ -161,25 +159,19 @@ function sendemail(params) {
 
 
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while sending email : ' + error.message);
     }
 
 }
 
 window.addEventListener("beforeunload", function (event) {
-    console.log("Page is about to be unloaded...");
     document.getElementById("spinner").style.display = 'flex';
     document.getElementById("main").style.display = 'none';
 });
 
 document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") {
-        // Page is about to be unloaded or hidden
         document.getElementById("spinner").style.display = 'none';
         document.getElementById("main").style.display = 'block';
-        console.log("Page is being hidden/unloaded...");
-    } else {
-        // Page is visible
-        console.log("Page is visible again.");
     }
 });

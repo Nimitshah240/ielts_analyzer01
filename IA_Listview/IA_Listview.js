@@ -4,6 +4,11 @@ var question;
 var exam;
 
 function connectedCallback() {
+    createToast('warning', 'Page is currently underdevelop');
+
+    if (!JSON.parse(localStorage.getItem('user_data'))) {
+        createToast('error', 'Please login first')
+    }
 
     signincheck(() => {
         examData();
@@ -13,30 +18,32 @@ function connectedCallback() {
 }
 function setHref(event) {
     try {
-
         var dynamicUrl = '../IA_DataEntry/IA_DataEntry.html?module=' + module;
         event.target.href = dynamicUrl;
         window.location.href = dynamicUrl;
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while redirecting : ' + error.message);
     }
 
 }
 
 function openexam(event) {
+    try {
+        let questions = [];
+        question.forEach(element => {
+            if (element.exam_id == event.target.id) {
+                questions.push(element);
+            }
+        });
 
-    let questions = [];
-    question.forEach(element => {
-        if (element.exam_id == event.target.id) {
-            questions.push(element);
-        }
-    });
+        localStorage.setItem("question" + event.target.id, JSON.stringify(questions));
 
-    localStorage.setItem("question" + event.target.id, JSON.stringify(questions));
-
-    var dynamicUrl = '../IA_DataEntry/IA_DataEntry.html?module=' + module + '&tdExam=' + event.target.id;
-    event.target.href = dynamicUrl;
-    window.location.href = dynamicUrl;
+        var dynamicUrl = '../IA_DataEntry/IA_DataEntry.html?module=' + module + '&tdExam=' + event.target.id;
+        event.target.href = dynamicUrl;
+        window.location.href = dynamicUrl;
+    } catch (error) {
+        createToast('error', 'Error while fetching exam : ' + error.message);
+    }
 }
 
 function examData() {
@@ -130,9 +137,9 @@ function examData() {
                 document.getElementById("table").innerHTML = htmldata;
 
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => createToast('error', 'Error while fetching exams : ' + error.message));
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while fetching exams : ' + error.message);
     }
 }
 
@@ -155,24 +162,18 @@ function deleteexam(event) {
 
 
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while deleting exam : ' + error.message);
     }
 }
 
 window.addEventListener("beforeunload", function (event) {
-    console.log("Page is about to be unloaded...");
     document.getElementById("spinner").style.display = 'flex';
     document.getElementById("main").style.display = 'none';
 });
 
 document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") {
-        // Page is about to be unloaded or hidden
         document.getElementById("spinner").style.display = 'none';
         document.getElementById("main").style.display = 'block';
-        console.log("Page is being hidden/unloaded...");
-    } else {
-        // Page is visible
-        console.log("Page is visible again.");
     }
 });

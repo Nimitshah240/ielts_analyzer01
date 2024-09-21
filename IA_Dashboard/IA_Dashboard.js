@@ -20,8 +20,11 @@ let responseData = [];
 
 async function connectedCallback() {
     try {
+        createToast('warning', 'Page is currently underdevelop');
 
-
+        if (!user_id) {
+            createToast('error', 'Please login first')
+        }
         signincheck(() => {
             fetchUserData();
 
@@ -93,11 +96,11 @@ async function connectedCallback() {
                 chart9();
 
             } catch (error) {
-                console.error(error.message);
+                createToast('error', 'Error while loading chart : ' + error.message)
             }
         }
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while loading chart : ' + error.message)
     }
 }
 
@@ -129,29 +132,29 @@ function chart1() {
         chart.draw(data, options);
 
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while loading chart 1 : ' + error.message)
     }
 }
 
 function chart2() {
-    // 2nd Chart ------------------------------------------------------
-
-    var data2 = google.visualization.arrayToDataTable([
-        ['Label', 'Value'],
-        ['Total Exam', exammap.size]
-    ]);
-
-    var options2 = {
-        width: 500, height: 300,
-        redFrom: 0, redTo: 8,
-        yellowFrom: 9, yellowTo: 14,
-        greenFrom: 15, greenTo: 20,
-    };
-
     try {
+        // 2nd Chart ------------------------------------------------------
+
+        var data2 = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['Total Exam', exammap.size]
+        ]);
+
+        var options2 = {
+            width: 500, height: 300,
+            redFrom: 0, redTo: 8,
+            yellowFrom: 9, yellowTo: 14,
+            greenFrom: 15, greenTo: 20,
+        };
+
         var chart2 = new google.visualization.Gauge(document.getElementById('chart2'));
     } catch (error) {
-        console.error(error.message);
+        createToast('error', 'Error while loading chart 2 : ' + error.message)
     }
 
     chart2.draw(data2, options2);
@@ -184,64 +187,73 @@ function chart3() {
         chart.draw(data, options);
 
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while loading chart 3 : ' + error.message)
     }
 
 
 }
 
 function chart4() {
-    // 4th Chart ----------------------------------------------------
+    try {
+        // 4th Chart ----------------------------------------------------
 
-    let setdata = [];
-    setdata.push(["Question Type", "Incorrect", { role: "style" }]);
+        let setdata = [];
+        setdata.push(["Question Type", "Incorrect", { role: "style" }]);
 
-    for (let key of question_correct.keys()) {
-        setdata.push([key, question_correct.get(key), "black"])
+        for (let key of question_correct.keys()) {
+            setdata.push([key, question_correct.get(key), "black"])
+        }
+
+        var data = google.visualization.arrayToDataTable(setdata);
+
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+            {
+                calc: "stringify",
+                sourceColumn: 1,
+                type: "string",
+                role: "annotation"
+            },
+            2]);
+
+        var options = {
+            title: "Total Correct / Question Type",
+            bar: { groupWidth: "75%" },
+            legend: { position: "none" },
+            bars: 'vertical'
+        };
+        var chart = new google.visualization.BarChart(document.getElementById("chart4"));
+        chart.draw(view, options);
+
+    } catch (error) {
+        createToast('error', 'Error while loading chart 4 : ' + error.message)
     }
-
-    var data = google.visualization.arrayToDataTable(setdata);
-
-    var view = new google.visualization.DataView(data);
-    view.setColumns([0, 1,
-        {
-            calc: "stringify",
-            sourceColumn: 1,
-            type: "string",
-            role: "annotation"
-        },
-        2]);
-
-    var options = {
-        title: "Total Correct / Question Type",
-        bar: { groupWidth: "75%" },
-        legend: { position: "none" },
-        bars: 'vertical'
-    };
-    var chart = new google.visualization.BarChart(document.getElementById("chart4"));
-    chart.draw(view, options);
 }
 
 function chart5() {
+    try {
+        // 5th Chart ---------------------------------------------- 
 
-    // 5th Chart ---------------------------------------------- 
+        let setdata = [];
+        setdata.push(['Exam', 'Score']);
 
-    let setdata = [];
-    setdata.push(['Exam', 'Score']);
+        for (const key of exammap.keys()) {
+            setdata.push([exammap.get(key).exam_name, exammap.get(key).score])
+        }
 
-    for (const key of exammap.keys()) {
-        setdata.push([exammap.get(key).exam_name, exammap.get(key).score])
+        var data = google.visualization.arrayToDataTable(setdata);
+        var options = {
+            title: 'Exam Performance',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart5'));
+
+        chart.draw(data, options);
+
+    } catch (error) {
+        createToast('error', 'Error while loading chart 5 : ' + error.message)
     }
-
-    var data = google.visualization.arrayToDataTable(setdata);
-    var options = {
-        title: 'Exam Performance',
-        legend: { position: 'bottom' }
-    };
-
-    var chart = new google.visualization.LineChart(document.getElementById('chart5'));
-
-    chart.draw(data, options);
 }
 
 function chart6() {
@@ -275,7 +287,7 @@ function chart6() {
         var chart = new google.visualization.BarChart(document.getElementById("chart6"));
         chart.draw(view, options);
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while loading chart 6 : ' + error.message)
     }
 }
 
@@ -360,167 +372,175 @@ function chart7() {
         chart.draw(data, options);
 
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while loading chart 7 : ' + error.message)
     }
 }
 
 function chart8() {
-    // 8th Chart -----------------------------------------------
+    try {
+        // 8th Chart -----------------------------------------------
+        let quest_score1 = new Map();
+        let quest_score2 = new Map();
+        let quest_score3 = new Map();
+        let quest_score4 = new Map();
+        let question_type = [];
+        let sec1 = [];
+        let sec2 = [];
+        let sec3 = [];
+        let sec4 = [];
 
+        responseData.forEach(element => {
 
-    let quest_score1 = new Map();
-    let quest_score2 = new Map();
-    let quest_score3 = new Map();
-    let quest_score4 = new Map();
-    let question_type = [];
-    let sec1 = [];
-    let sec2 = [];
-    let sec3 = [];
-    let sec4 = [];
-
-
-    responseData.forEach(element => {
-
-        if (!question_type.includes(element.question_type) && element.incorrect != '') {
-            question_type.push(element.question_type);
-        }
-        if (element.section == 1) {
-            if (quest_score1.has(element.question_type)) {
-                quest_score1.set(element.question_type, quest_score1.get(element.question_type) + element.incorrect);
-            } else {
-                quest_score1.set(element.question_type, element.incorrect);
+            if (!question_type.includes(element.question_type) && element.incorrect != '') {
+                question_type.push(element.question_type);
             }
-        } else if (element.section == 2) {
-            if (quest_score2.has(element.question_type)) {
-                quest_score2.set(element.question_type, quest_score2.get(element.question_type) + element.incorrect);
-            } else {
-                quest_score2.set(element.question_type, element.incorrect);
+            if (element.section == 1) {
+                if (quest_score1.has(element.question_type)) {
+                    quest_score1.set(element.question_type, quest_score1.get(element.question_type) + element.incorrect);
+                } else {
+                    quest_score1.set(element.question_type, element.incorrect);
+                }
+            } else if (element.section == 2) {
+                if (quest_score2.has(element.question_type)) {
+                    quest_score2.set(element.question_type, quest_score2.get(element.question_type) + element.incorrect);
+                } else {
+                    quest_score2.set(element.question_type, element.incorrect);
+                }
+            } else if (element.section == 3) {
+                if (quest_score3.has(element.question_type)) {
+                    quest_score3.set(element.question_type, quest_score3.get(element.question_type) + element.incorrect);
+                } else {
+                    quest_score3.set(element.question_type, element.incorrect);
+                }
+            } else if (element.section == 4) {
+                if (quest_score4.has(element.question_type)) {
+                    quest_score4.set(element.question_type, quest_score4.get(element.question_type) + element.incorrect);
+                } else {
+                    quest_score4.set(element.question_type, element.incorrect);
+                }
             }
-        } else if (element.section == 3) {
-            if (quest_score3.has(element.question_type)) {
-                quest_score3.set(element.question_type, quest_score3.get(element.question_type) + element.incorrect);
-            } else {
-                quest_score3.set(element.question_type, element.incorrect);
-            }
-        } else if (element.section == 4) {
-            if (quest_score4.has(element.question_type)) {
-                quest_score4.set(element.question_type, quest_score4.get(element.question_type) + element.incorrect);
-            } else {
-                quest_score4.set(element.question_type, element.incorrect);
-            }
-        }
-    });
+        });
 
 
-    question_type.forEach(element => {
-        sec1.push((quest_score1.get(element) == undefined ? 0 : quest_score1.get(element)))
-        sec2.push((quest_score2.get(element) == undefined ? 0 : quest_score2.get(element)))
-        sec3.push((quest_score3.get(element) == undefined ? 0 : quest_score3.get(element)))
-        sec4.push((quest_score4.get(element) == undefined ? 0 : quest_score4.get(element)))
-    });
+        question_type.forEach(element => {
+            sec1.push((quest_score1.get(element) == undefined ? 0 : quest_score1.get(element)))
+            sec2.push((quest_score2.get(element) == undefined ? 0 : quest_score2.get(element)))
+            sec3.push((quest_score3.get(element) == undefined ? 0 : quest_score3.get(element)))
+            sec4.push((quest_score4.get(element) == undefined ? 0 : quest_score4.get(element)))
+        });
 
-    question_type = ['Section', ...question_type, { role: 'annotation' }];
-    sec1 = ['Section 1', ...sec1, ''];
-    sec2 = ['Section 2', ...sec2, ''];
-    sec3 = ['Section 3', ...sec3, ''];
-    sec4 = ['Section 4', ...sec4, ''];
+        question_type = ['Section', ...question_type, { role: 'annotation' }];
+        sec1 = ['Section 1', ...sec1, ''];
+        sec2 = ['Section 2', ...sec2, ''];
+        sec3 = ['Section 3', ...sec3, ''];
+        sec4 = ['Section 4', ...sec4, ''];
 
-    var data = google.visualization.arrayToDataTable([
-        question_type,
-        sec1,
-        sec2,
-        sec3,
-        sec4
-    ]);
+        var data = google.visualization.arrayToDataTable([
+            question_type,
+            sec1,
+            sec2,
+            sec3,
+            sec4
+        ]);
 
-    var options = {
-        legend: { position: 'bottom', maxLines: 10 },
-        bar: { groupWidth: '75%' },
-        isStacked: true,
-        title: 'Incorrect Question / Section'
+        var options = {
+            legend: { position: 'bottom', maxLines: 10 },
+            bar: { groupWidth: '75%' },
+            isStacked: true,
+            title: 'Incorrect Question / Section'
 
-    };
+        };
 
-    var chart = new google.visualization.BarChart(document.getElementById("chart8"));
-    chart.draw(data, options);
+        var chart = new google.visualization.BarChart(document.getElementById("chart8"));
+        chart.draw(data, options);
+
+
+    } catch (error) {
+        createToast('error', 'Error while loading chart 8 : ' + error.message)
+    }
 }
 
 function chart9() {
-    // 9th Chart --------------------------------------------
-    let quest_score1 = new Map();
-    let quest_score2 = new Map();
-    let quest_score3 = new Map();
-    let quest_score4 = new Map();
-    let question_type = [];
-    let sec1 = [];
-    let sec2 = [];
-    let sec3 = [];
-    let sec4 = [];
+    try {
+        // 9th Chart --------------------------------------------
+        let quest_score1 = new Map();
+        let quest_score2 = new Map();
+        let quest_score3 = new Map();
+        let quest_score4 = new Map();
+        let question_type = [];
+        let sec1 = [];
+        let sec2 = [];
+        let sec3 = [];
+        let sec4 = [];
 
-    responseData.forEach(element => {
+        responseData.forEach(element => {
 
-        if (!question_type.includes(element.question_type) && element.miss != '') {
-            question_type.push(element.question_type);
-        }
-        if (element.section == 1) {
-            if (quest_score1.has(element.question_type)) {
-                quest_score1.set(element.question_type, quest_score1.get(element.question_type) + element.miss);
-            } else {
-                quest_score1.set(element.question_type, element.miss);
+            if (!question_type.includes(element.question_type) && element.miss != '') {
+                question_type.push(element.question_type);
             }
-        } else if (element.section == 2) {
-            if (quest_score2.has(element.question_type)) {
-                quest_score2.set(element.question_type, quest_score2.get(element.question_type) + element.miss);
-            } else {
-                quest_score2.set(element.question_type, element.miss);
+            if (element.section == 1) {
+                if (quest_score1.has(element.question_type)) {
+                    quest_score1.set(element.question_type, quest_score1.get(element.question_type) + element.miss);
+                } else {
+                    quest_score1.set(element.question_type, element.miss);
+                }
+            } else if (element.section == 2) {
+                if (quest_score2.has(element.question_type)) {
+                    quest_score2.set(element.question_type, quest_score2.get(element.question_type) + element.miss);
+                } else {
+                    quest_score2.set(element.question_type, element.miss);
+                }
+            } else if (element.section == 3) {
+                if (quest_score3.has(element.question_type)) {
+                    quest_score3.set(element.question_type, quest_score3.get(element.question_type) + element.miss);
+                } else {
+                    quest_score3.set(element.question_type, element.miss);
+                }
+            } else if (element.section == 4) {
+                if (quest_score4.has(element.question_type)) {
+                    quest_score4.set(element.question_type, quest_score4.get(element.question_type) + element.miss);
+                } else {
+                    quest_score4.set(element.question_type, element.miss);
+                }
             }
-        } else if (element.section == 3) {
-            if (quest_score3.has(element.question_type)) {
-                quest_score3.set(element.question_type, quest_score3.get(element.question_type) + element.miss);
-            } else {
-                quest_score3.set(element.question_type, element.miss);
-            }
-        } else if (element.section == 4) {
-            if (quest_score4.has(element.question_type)) {
-                quest_score4.set(element.question_type, quest_score4.get(element.question_type) + element.miss);
-            } else {
-                quest_score4.set(element.question_type, element.miss);
-            }
-        }
-    });
+        });
 
-    question_type.forEach(element => {
-        sec1.push((quest_score1.get(element) == undefined ? 0 : quest_score1.get(element)))
-        sec2.push((quest_score2.get(element) == undefined ? 0 : quest_score2.get(element)))
-        sec3.push((quest_score3.get(element) == undefined ? 0 : quest_score3.get(element)))
-        sec4.push((quest_score4.get(element) == undefined ? 0 : quest_score4.get(element)))
-    });
+        question_type.forEach(element => {
+            sec1.push((quest_score1.get(element) == undefined ? 0 : quest_score1.get(element)))
+            sec2.push((quest_score2.get(element) == undefined ? 0 : quest_score2.get(element)))
+            sec3.push((quest_score3.get(element) == undefined ? 0 : quest_score3.get(element)))
+            sec4.push((quest_score4.get(element) == undefined ? 0 : quest_score4.get(element)))
+        });
 
-    question_type = ['Section', ...question_type, { role: 'annotation' }];
-    sec1 = ['Section 1', ...sec1, ''];
-    sec2 = ['Section 2', ...sec2, ''];
-    sec3 = ['Section 3', ...sec3, ''];
-    sec4 = ['Section 4', ...sec4, ''];
+        question_type = ['Section', ...question_type, { role: 'annotation' }];
+        sec1 = ['Section 1', ...sec1, ''];
+        sec2 = ['Section 2', ...sec2, ''];
+        sec3 = ['Section 3', ...sec3, ''];
+        sec4 = ['Section 4', ...sec4, ''];
 
-    var data = google.visualization.arrayToDataTable([
-        question_type,
-        sec1,
-        sec2,
-        sec3,
-        sec4
-    ]);
+        var data = google.visualization.arrayToDataTable([
+            question_type,
+            sec1,
+            sec2,
+            sec3,
+            sec4
+        ]);
 
-    var options = {
-        legend: { position: 'bottom', maxLines: 10 },
-        bar: { groupWidth: '75%' },
-        isStacked: true,
-        bars: 'vertical',
-        title: 'Miss Question / Section'
-    };
+        var options = {
+            legend: { position: 'bottom', maxLines: 10 },
+            bar: { groupWidth: '75%' },
+            isStacked: true,
+            bars: 'vertical',
+            title: 'Miss Question / Section'
+        };
 
-    var chart = new google.visualization.BarChart(document.getElementById("chart9"));
-    chart.draw(data, options);
+        var chart = new google.visualization.BarChart(document.getElementById("chart9"));
+        chart.draw(data, options);
 
+
+    } catch (error) {
+        createToast('error', 'Error while loading chart 9 : ' + error.message)
+    }
 }
 
 window.addEventListener("beforeunload", function (event) {

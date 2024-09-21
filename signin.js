@@ -25,8 +25,9 @@ function sigin() {
 
         document.body.appendChild(form);
         form.submit();
+        createToast('success', 'You are signin');
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while signin : ' + error.message);
     }
 }
 
@@ -69,10 +70,9 @@ async function signincheck(callback) {
                         localStorage.setItem('user_data', JSON.stringify(info));
 
                         const data = JSON.parse(localStorage.getItem('user_data'));
-                        console.log(JSON.stringify(data));
 
                         if (data) {
-                            
+
                             let today = new Date();
                             let year = today.getFullYear();
                             let month = ('0' + (today.getMonth() + 1)).slice(-2);
@@ -86,7 +86,6 @@ async function signincheck(callback) {
 
                             delete data.family_name;
                             delete data.given_name;
-                            console.log('post login data');
 
                             fetch('https://ieltsanalyzer.up.railway.app/logindata', {
                                 method: 'POST',
@@ -103,11 +102,13 @@ async function signincheck(callback) {
                         callback();
                     });
             }
+            createToast('warning', 'No signin user');
+
         } else {
             callback();
         }
     } catch (error) {
-        console.error('e', error);
+        createToast('error', 'Error while signin : ' + error.message);
     }
 }
 
@@ -122,6 +123,7 @@ function signout() {
             }
         })
             .then(() => {
+                createToast('success', 'You are successfully signout');
                 localStorage.removeItem('authInfo');
                 localStorage.removeItem('user_data');
                 document.getElementById('not-log').style.display = 'block';
