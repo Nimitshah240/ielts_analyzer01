@@ -6,10 +6,6 @@ var exam;
 function connectedCallback() {
     createToast('warning', 'Page is currently underdevelop');
 
-    if (!JSON.parse(localStorage.getItem('user_data'))) {
-        createToast('error', 'Please login first')
-    }
-
     signincheck(() => {
         examData();
         fetchUserData();
