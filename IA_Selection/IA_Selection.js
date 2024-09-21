@@ -8,7 +8,7 @@ function connectedCallback(event) {
         });
 
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while loading: ' + error.message);
     }
 }
 
@@ -30,24 +30,18 @@ function setHrefs(event) {
         window.location.href = dynamicUrl;
 
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while redirecting : ' + error.message);
     }
 }
 
 window.addEventListener("beforeunload", function (event) {
-    console.log("Page is about to be unloaded...");
     document.getElementById("spinner").style.display = 'flex';
     document.getElementById("main").style.display = 'none';
 });
 
 document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") {
-        // Page is about to be unloaded or hidden
         document.getElementById("spinner").style.display = 'none';
         document.getElementById("main").style.display = 'block';
-        console.log("Page is being hidden/unloaded...");
-    } else {
-        // Page is visible
-        console.log("Page is visible again.");
     }
 });

@@ -9,10 +9,19 @@ let user_data = JSON.parse(localStorage.getItem('user_data'));
 let user_id = user_data.user_id;
 
 function connectedCallback() {
-    sectionsetter();
-    signincheck(() => {
-        fetchUserData();
-    });
+    try {
+        createToast('warning', 'Page is currently underdevelop');
+
+        if (!JSON.parse(localStorage.getItem('user_data'))) {
+            createToast('error', 'Please login first')
+        }
+        sectionsetter();
+        signincheck(() => {
+            fetchUserData();
+        });
+    } catch (error) {
+        createToast('error', 'Error while loading : ' + error.message);
+    }
 }
 
 function sectionsetter() {
@@ -62,20 +71,9 @@ function sectionsetter() {
 
 
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while setting data : ' + error.message);
     }
 }
-
-// function setHref(event) {
-//     try {
-
-//         var dynamicUrl = '../IA_Listview/IA_Listview.html?module=' + module;
-//         event.target.href = dynamicUrl;
-//         window.location.href = dynamicUrl;
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
 
 function popupopen(event) {
     try {
@@ -114,9 +112,7 @@ function popupopen(event) {
 
         }
     } catch (error) {
-        console.error(error.message);
-        console.error(error.linenumber);
-
+        createToast('error', 'Error while loading exam data : ' + error.message);
     }
 }
 
@@ -141,42 +137,47 @@ function popupclose(event) {
 
 // To get data on each save and new button click
 function getData(event) {
-    const selectElement = document.getElementById('question' + event.target.id);
-    const question_type = selectElement.value;
+    try {
 
-    let correct = 0;
-    let incorrect = 0;
-    let miss = 0;
-    let total;
+        const selectElement = document.getElementById('question' + event.target.id);
+        const question_type = selectElement.value;
 
-    correct = parseInt(document.getElementById('correct' + event.target.id).value);
-    incorrect = parseInt(document.getElementById('incorrect' + event.target.id).value);
-    miss = parseInt(document.getElementById('miss' + event.target.id).value);
-    total = correct + incorrect + miss;
+        let correct = 0;
+        let incorrect = 0;
+        let miss = 0;
+        let total;
+
+        correct = parseInt(document.getElementById('correct' + event.target.id).value);
+        incorrect = parseInt(document.getElementById('incorrect' + event.target.id).value);
+        miss = parseInt(document.getElementById('miss' + event.target.id).value);
+        total = correct + incorrect + miss;
 
 
-    question.push(
-        {
-            "band": "",
-            "correct": correct,
-            "date": "",
-            "exam_id": exam_id == "" ? "" : exam_id,
-            "exam_name": exam_name == "" ? "" : exam_name,
-            "id": "",
-            "incorrect": incorrect,
-            "miss": miss,
-            "module": module,
-            "question_type": question_type,
-            "section": event.target.id,
-            "total": total,
-            "user_id": user_id,
-        }
-    )
+        question.push(
+            {
+                "band": "",
+                "correct": correct,
+                "date": "",
+                "exam_id": exam_id == "" ? "" : exam_id,
+                "exam_name": exam_name == "" ? "" : exam_name,
+                "id": "",
+                "incorrect": incorrect,
+                "miss": miss,
+                "module": module,
+                "question_type": question_type,
+                "section": event.target.id,
+                "total": total,
+                "user_id": user_id,
+            }
+        )
 
-    document.getElementById('correct' + event.target.id).value = 0;
-    document.getElementById('incorrect' + event.target.id).value = 0;
-    document.getElementById('miss' + event.target.id).value = 0
-    selectElement.value = 'MCQ';
+        document.getElementById('correct' + event.target.id).value = 0;
+        document.getElementById('incorrect' + event.target.id).value = 0;
+        document.getElementById('miss' + event.target.id).value = 0
+        selectElement.value = 'MCQ';
+    } catch (error) {
+        createToast('error', 'Error while getting data : ' + error.message);
+    }
 }
 
 // To save exam
@@ -227,7 +228,7 @@ function saveexam(event) {
 
         }
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while saving data : ' + error.message);
     }
 }
 
@@ -255,28 +256,23 @@ function deletequestion(event) {
                 });
                 localStorage.setItem('question' + tdExam, JSON.stringify(question))
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error =>
+                createToast('error', 'Error while deleting data : ' + error.message));
 
     } catch (error) {
-        console.error(error);
+        createToast('error', 'Error while deleting data : ' + error.message);
     }
 
 }
 
 window.addEventListener("beforeunload", function (event) {
-    console.log("Page is about to be unloaded...");
     document.getElementById("spinner").style.display = 'flex';
     document.getElementById("main").style.display = 'none';
 });
 
 document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") {
-        // Page is about to be unloaded or hidden
         document.getElementById("spinner").style.display = 'none';
         document.getElementById("main").style.display = 'block';
-        console.log("Page is being hidden/unloaded...");
-    } else {
-        // Page is visible
-        console.log("Page is visible again.");
     }
 });

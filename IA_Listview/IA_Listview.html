@@ -10,6 +10,8 @@
     <script src='../index.js'></script>
     <script src='./IA_Listview.js'></script>
     <script src='../signin.js'></script>
+    <script src='../IA_Toast/IA_Toast.js'></script>
+    <link rel='stylesheet' href='../IA_Toast/IA_Toast.css'>
 </head>
 
 <body onload="connectedCallback()">
@@ -17,12 +19,15 @@
     <!-- Spinner -->
     <iframe src="../IA_Spinner/IA_Spinner.html" id="spinner" class="spinner" frameborder="0"></iframe>
     <!-- Spinner -->
+    <!-- Toast -->
+    <ul class="notifications" id="notifications"> </ul>
+    <!-- Toast -->
 
     <main id="main">
-        <div class="header">
+        <div class="header glass">
             <div class="logo">
-                <p class="companylogo"> IELTS <span style="color: #106eea;">Analyzer.</span></p>
-                <p>Score more than 8 bands</p>
+                <h1 class="companylogo"> IELTS <span style="color: #106eea;">Analyzer.</span></h1>
+                <h5 class="descrip">Score more than 8 bands</h5>
             </div>
             <div class="details">
                 <a class="navbartransition" href="#" onclick="setHref(event)">New</a>

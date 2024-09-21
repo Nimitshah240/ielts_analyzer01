@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src='./index.js'></script>
     <script src='../signin.js'></script>
+    <script src='./IA_Toast/IA_Toast.js'></script>
+    <link rel='stylesheet' href='./IA_Toast/IA_Toast.css'>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
-
 </head>
 
 <body onload="connectedCallback(event)">
@@ -24,6 +25,9 @@
     <!-- Spinner -->
     <iframe src="../IA_Spinner/IA_Spinner.html" id="spinner" class="spinner" frameborder="0"></iframe>
     <!-- Spinner -->
+    <!-- Toast -->
+    <ul class="notifications" id="notifications"> </ul>
+    <!-- Toast -->
 
     <main id="main">
         <div class="header glass">
