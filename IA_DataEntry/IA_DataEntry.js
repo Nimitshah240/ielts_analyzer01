@@ -186,7 +186,7 @@ function saveexam(event) {
         let exam_name = document.getElementById('examname').value;
         let exam_date = document.getElementById('examdate').value;
         exam_date = new Date(exam_date);
-        exam_date = new Date(exam_date.getTime() - (exam_date.getTimezoneOffset() * 60000)).toISOString();
+        exam_date = exam_date.toISOString().slice(0, 10);
         let correct = 0;
         let band = 0;
         if (exam_name == '' || exam_date == '') {
