@@ -9,7 +9,7 @@ function connectedCallback() {
     createToast('warning', 'Page is currently underdevelop');
     if (savedexam == 'yes') {
         createToast('success', 'Exam has been saved');
-        window.history.pushState({}, document.title, `/IA_Code/IA_Listview/IA_Listview.html?module=${module}`);
+        window.history.pushState({}, document.title, `/IA_Listview/IA_Listview.html?module=${module}`);
     }
     signincheck(() => {
         examData();
