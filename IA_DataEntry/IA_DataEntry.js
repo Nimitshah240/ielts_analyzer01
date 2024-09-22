@@ -4,7 +4,8 @@ var tdExam = urlSearchParams.get('tdExam')
 var question = [];
 question = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? [] : JSON.parse(localStorage.getItem('question' + tdExam));
 let exam_name = (JSON.parse(localStorage.getItem('question' + tdExam))) == "" ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_name;
-let exam_id = (JSON.parse(localStorage.getItem('question' + tdExam))) == "" ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_id;
+let exam_id = '';
+exam_id = (JSON.parse(localStorage.getItem('question' + tdExam))) == "" ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_id;
 let user_data = JSON.parse(localStorage.getItem('user_data'));
 let user_id = user_data.user_id;
 
