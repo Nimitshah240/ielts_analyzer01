@@ -112,7 +112,6 @@ function popupopen(event) {
 
         }
     } catch (error) {
-        console.log(error);
         createToast('error', 'Error while loading exam data : ' + error.message);
     }
 }
