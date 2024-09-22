@@ -121,7 +121,7 @@ function popupclose(event) {
         var type = event.target.id;
         if (type == 'save') {
             // document.getElementById('save-div').style.display = 'none';
-            dynamicUrl = '../IA_Listview/IA_Listview.html?module=' + module;
+            dynamicUrl = '../IA_Listview/IA_Listview.html?module=' + module + '&savedexam=yes';
 
             event.target.href = dynamicUrl;
             window.location.href = dynamicUrl;
@@ -220,12 +220,10 @@ function saveexam(event) {
                     'exam_id': exam_id == "" ? "" : exam_id
                 },
                 body: JSON.stringify(question),
-            })
-                .then(response => response.json())
-                .then(responseData => {
-                });
-            popupclose(event);
+            }).then(response => {
+                popupclose(event);
 
+            });
         }
     } catch (error) {
         createToast('error', 'Error while saving data : ' + error.message);

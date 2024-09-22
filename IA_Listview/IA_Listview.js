@@ -1,11 +1,16 @@
 const urlSearchParams = new URLSearchParams(window.location.search);
 const module = urlSearchParams.get('module');
+var savedexam = urlSearchParams.get('savedexam')
 var question;
 var exam;
+let data = [];
 
 function connectedCallback() {
     createToast('warning', 'Page is currently underdevelop');
-
+    if (savedexam == 'yes') {
+        createToast('success', 'Exam has been saved');
+        window.history.pushState({}, document.title, `/IA_Code/IA_Listview/IA_Listview.html?module=${module}`);
+    }
     signincheck(() => {
         examData();
         fetchUserData();
@@ -50,7 +55,6 @@ function examData() {
             .then(responseData => {
                 question = responseData;
 
-                let data = [];
                 const Section1 = new Map();
                 const Section2 = new Map();
                 const Section3 = new Map();
@@ -150,12 +154,36 @@ function deleteexam(event) {
             }
         })
             .then(response => response.json())
-            .then(data => {
+            .then(datas => {
                 const divToRemove = document.getElementById(exam_id);
                 divToRemove.remove();
-            })
-            .catch(error => console.error('Error:', error));
+                data.forEach((element, i) => {
+                    if (element.exam_id == exam_id) {
+                        data.splice(i, 1);
+                    }
+                });
 
+                let htmldata = '';
+                data.forEach((element, index) => {
+                    htmldata +=
+                        '<div class="data" id=' + element.exam_id + '>' +
+                        '<div class="column index" onclick="openexam(event)" id=' + element.exam_id + '>' + (index + 1) + '</div>' +
+                        '<div class="column examname" onclick="openexam(event)" id=' + element.exam_id + '>' + element.exam_name + '</div>' +
+                        '<div class="column date" onclick="openexam(event)" id=' + element.exam_id + '>' + element.date + '</div>' +
+                        '<div class="column total" onclick="openexam(event)" id=' + element.exam_id + '>' + element.total + '</div>' +
+                        '<div class="column section" onclick="openexam(event)" id=' + element.exam_id + '>' + element["Section 1"] + '</div>' +
+                        '<div class="column section" onclick="openexam(event)" id=' + element.exam_id + '>' + element["Section 2"] + '</div>' +
+                        '<div class="column section" onclick="openexam(event)" id=' + element.exam_id + '>' + element["Section 3"] + '</div>' +
+                        '<div class="column section" onclick="openexam(event)" id=' + element.exam_id + '>' + element["Section 4"] + '</div>' +
+                        '<div class="column delete" onclick="deleteexam(event)" id=' + element.exam_id + `> <i class="fa fa-trash" id="${element.exam_id}" aria-hidden="true"></i>` +
+                        '</div>' +
+                        '</div>'
+                });
+
+                document.getElementById("table").innerHTML = htmldata;
+            }).catch(error => {
+                createToast('error', 'Error while deleting exam : ' + error.message);
+            });
 
     } catch (error) {
         createToast('error', 'Error while deleting exam : ' + error.message);
