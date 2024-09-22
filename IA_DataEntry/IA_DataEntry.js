@@ -2,15 +2,10 @@ try {
     const urlSearchParams = new URLSearchParams(window.location.search);
     var module = urlSearchParams.get('module');
     var tdExam = urlSearchParams.get('tdExam')
-    console.log('tdExam ' + tdExam);
     var question = [];
     question = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? [] : JSON.parse(localStorage.getItem('question' + tdExam));
-    console.log('question ' + question);
-
     let exam_name = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_name;
-    let exam_id = '';
-    console.log('exam_id ' + exam_id);
-    exam_id = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_id;
+    let exam_id = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_id;
     console.log('exam_id 1 ' + exam_id);
 
     let user_data = JSON.parse(localStorage.getItem('user_data'));
