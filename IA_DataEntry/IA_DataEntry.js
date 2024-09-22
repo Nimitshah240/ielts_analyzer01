@@ -82,7 +82,7 @@ function popupopen(event) {
         var type = event.target.id;
 
         if (type == 'save') {
-            let exam_date = new Date((JSON.parse(localStorage.getItem('question' + tdExam))) == "" ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].date);
+            let exam_date = new Date((JSON.parse(localStorage.getItem('question' + tdExam))) == null ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].date);
             let year = exam_date.getFullYear();
             let month = ('0' + (exam_date.getMonth() + 1)).slice(-2);
             let day = ('0' + exam_date.getDate()).slice(-2);
