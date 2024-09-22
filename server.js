@@ -116,12 +116,14 @@ app.post('/api/insertExam', (req, res) => {
         connection.execute(exam_query, (error, results) => {
             if (error) console.error(error);
             questioninsert(receivedData, exam_id);
+            res.json(receivedData);
         });
     } else {
         connection.execute(exam_query, (error, results) => {
             if (error) console.error(error);
             exam_id = results.insertId;
             questioninsert(receivedData, exam_id);
+            res.json(receivedData);
         });
     }
 });
