@@ -5,8 +5,6 @@ var question = [];
 question = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? [] : JSON.parse(localStorage.getItem('question' + tdExam));
 let exam_name = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_name;
 let exam_id = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_id;
-console.log('exam_id 1 ' + exam_id);
-
 let user_data = JSON.parse(localStorage.getItem('user_data'));
 let user_id = user_data.user_id;
 
@@ -91,7 +89,7 @@ function popupopen(event) {
             exam_date = `${year}-${month}-${day}`;
 
             document.getElementById('examdate').value = exam_date;
-            document.getElementById('examname').value = (JSON.parse(localStorage.getItem('question' + tdExam))) == "" ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_name;
+            document.getElementById('examname').value = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_name;
             document.getElementById('save-div').style.display = 'flex';
 
         } else {
@@ -114,6 +112,7 @@ function popupopen(event) {
 
         }
     } catch (error) {
+        console.log(error);
         createToast('error', 'Error while loading exam data : ' + error.message);
     }
 }
@@ -140,8 +139,6 @@ function popupclose(event) {
 // To get data on each save and new button click
 function getData(event) {
     try {
-        console.log(event.target.id);
-
         const selectElement = document.getElementById('question' + event.target.id);
         const question_type = selectElement.value;
 
@@ -154,8 +151,6 @@ function getData(event) {
         incorrect = parseInt(document.getElementById('incorrect' + event.target.id).value);
         miss = parseInt(document.getElementById('miss' + event.target.id).value);
         total = correct + incorrect + miss;
-        console.log('exam_id 3 ' + exam_id);
-        console.log('exam_name ' + exam_name);
 
         question.push(
             {
@@ -180,7 +175,6 @@ function getData(event) {
         document.getElementById('miss' + event.target.id).value = 0
         selectElement.value = 'MCQ';
     } catch (error) {
-        console.log(error);
         createToast('error', 'Error while getting data : ' + error.message);
     }
 }
