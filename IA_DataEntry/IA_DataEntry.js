@@ -1,20 +1,24 @@
-const urlSearchParams = new URLSearchParams(window.location.search);
-var module = urlSearchParams.get('module');
-var tdExam = urlSearchParams.get('tdExam')
-console.log('tdExam ' + tdExam);
-var question = [];
-question = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? [] : JSON.parse(localStorage.getItem('question' + tdExam));
-console.log('question ' + question);
+try {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    var module = urlSearchParams.get('module');
+    var tdExam = urlSearchParams.get('tdExam')
+    console.log('tdExam ' + tdExam);
+    var question = [];
+    question = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? [] : JSON.parse(localStorage.getItem('question' + tdExam));
+    console.log('question ' + question);
 
-let exam_name = (JSON.parse(localStorage.getItem('question' + tdExam))) == "" ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_name;
-let exam_id = '';
-console.log('exam_id ' + exam_id);
-exam_id = (JSON.parse(localStorage.getItem('question' + tdExam))) == "" ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_id;
-console.log('exam_id 1 ' + exam_id);
+    let exam_name = (JSON.parse(localStorage.getItem('question' + tdExam))) == "" ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_name;
+    let exam_id = '';
+    console.log('exam_id ' + exam_id);
+    exam_id = (JSON.parse(localStorage.getItem('question' + tdExam))) == "" ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_id;
+    console.log('exam_id 1 ' + exam_id);
 
-let user_data = JSON.parse(localStorage.getItem('user_data'));
-let user_id = user_data.user_id;
+    let user_data = JSON.parse(localStorage.getItem('user_data'));
+    let user_id = user_data.user_id;
+} catch (error) {
+    console.error(error, 's');
 
+}
 function connectedCallback() {
     try {
         createToast('warning', 'Page is currently underdevelop');
