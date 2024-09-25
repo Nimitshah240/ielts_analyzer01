@@ -29,6 +29,9 @@ const removeToast = (toast) => {
     toast.classList.add("hide");
     if (toast.timeoutId) clearTimeout(toast.timeoutId); // Clearing the timeout for the toast
     setTimeout(() => toast.remove(), 500); // Removing the toast after 500ms
+    Array.from(document.getElementsByClassName('glass')).forEach(element => {
+        element.style.backdropFilter = "blur(7.4px)";
+    });
 }
 
 const createToast = (id, message) => {
