@@ -23,6 +23,20 @@ a {
     cursor: pointer;
 }
 
+main {
+    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+
+body {
+    width: 100%;
+    margin: 0;
+    line-height: 1 !important;
+    font-family: none !important;
+}
+
 /* Spinner */
 
 .spinner {
@@ -34,723 +48,247 @@ a {
 
 /* Spinner */
 
+/* Glass */
+.glass {
+    background: rgba(255, 255, 255, 0.19);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.4px);
+    -webkit-backdrop-filter: blur(7.4px);
+    border: 1px solid rgba(255, 255, 255, 1);
+}
+
+/* Glass */
+
+/* header */
+.header {
+    height: 12%;
+    width: 100%;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    display: flex;
+}
+
+.details {
+    width: 40%;
+    gap: 25px;
+    padding-right: 6%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.logo {
+    width: 60%;
+    height: 100%;
+    padding-left: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.companylogo {
+    height: 25%;
+}
+
+.navbartransition::after {
+    content: '';
+    width: 0px;
+    height: 3px;
+    transition: 300ms;
+    border-radius: 5px;
+    display: block;
+    background: #106eea;
+}
+
+.navbartransition:hover::after {
+    width: 100%;
+}
+
+.navbartransition:hover {
+    color: #106eea;
+}
+
+/* header  */
+
+/* Body section */
+.body_section {
+
+    height: 100%;
+    padding-top: 20px;
+    gap: 10px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+}
+
+a.slide-up {
+    animation: 1.5s slide-up;
+    margin-top: 0%;
+}
+
+@keyframes slide-up {
+    from {
+        margin-top: 20%;
+        height: 80%;
+        opacity: 0;
+    }
+
+    to {
+        margin-top: 0%;
+        height: 80%;
+        opacity: 1;
+    }
+}
+
+/* Body section */
+
+/* Graph */
+.no_graph {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: orangered;
+}
+
+.graph_section1,
+.graph_section2,
+.graph_section3 {
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+
+.graph {
+    display: none;
+}
+
+.donut1 {
+    box-shadow: 0 7px 25px rgb(0 0 0 / 8%);
+    width: fit-content;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+}
+
+.chart1 {
+    width: 30px !important;
+    height: 20px !important;
+}
+
+/* Graph */
+
+
+/* Footer */
+
+.footer {
+    height: 50px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.19);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.4px);
+    margin-top: 35px;
+    display: flex;
+}
+
+.contact-icons {
+    width: 50%;
+    gap: 15px;
+    font-size: 25px;
+    padding-right: 5%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.contact-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 49px;
+    background-image: linear-gradient(144deg, #AF40FF, #42a5f3 50%, #00DDEB);
+    color: white;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.copyright {
+    width: 50%;
+    padding-left: 5%;
+    font-size: 15px;
+    margin: auto 0px;
+}
+
+/* Footer */
+
 @media screen and (max-width: 640px) {
 
-    body {
-        width: 100%;
-        margin: 0;
-        line-height: 1 !important;
-        font-family: none !important;
-    }
-
-    .header {
-        height: 90px;
-        width: 100%;
-        z-index: 997;
-        border-bottom: 1px solid lightgrey;
-        display: flex;
-        background-color: white;
-        position: fixed;
-    }
-
-    .body_section {
-        padding-top: 100px;
-        gap: 10px;
-        display: flex;
-        flex-direction: column;
-        overflow-x: scroll;
-    }
-
-    .logo {
-        width: 50%;
-        height: 50px;
-        margin: auto 25px;
-    }
-
-    .details {
-        width: 40%;
-        gap: 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .navbartransition {
-        font-weight: 100;
-        display: inline-block;
-        font-size: large;
-    }
-
-    .navbartransition::after {
-        content: '';
-        width: 0px;
-        height: 3px;
-        transition: 300ms;
-        border-radius: 5px;
-        display: block;
-        background: #106eea;
-    }
-
-    .navbartransition:hover::after {
-        width: 100%;
-    }
-
-    .navbartransition:hover {
-        color: #106eea;
-    }
-
-    .companylogo {
-        margin: 0;
-        height: 20px;
-        font-size: 25px;
-    }
-
     a.slide-up {
-        animation: 1.5s slide-up;
         margin-top: 10%;
     }
 
     @keyframes slide-up {
         from {
             margin-top: 30%;
-            height: 80%;
-            opacity: 0;
         }
 
         to {
             margin-top: 10%;
-            height: 80%;
-            opacity: 1;
         }
-    }
-
-    .buttons {
-        height: 600px;
-        background-color: whitesmoke;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    .box-icon {
-        color: #106eea;
-    }
-
-    .box {
-        width: 80%;
-        height: 40%;
-        border-radius: 5px;
-        gap: 10px;
-        line-height: 40px;
-        box-shadow: inset 0 -3px 0 -1px #106eea;
-        transition: box-shadow 0.5s ease-in-out;
-        color: black;
-        cursor: pointer;
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .box:hover {
-        box-shadow: inset 0 -500px 0 -1px #97f3ff;
-    }
-
-
-    .button-title {
-        font-size: 35px;
-    }
-
-    .contact {
-        width: 100%;
-        height: 100px;
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column;
-        background-color: white;
-    }
-
-    .contact-icons {
-        font-size: 28px;
-        width: 100%;
-        height: 65%;
-        gap: 27px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .contact-icon {
-        width: 45px;
-        height: 45px;
-        border-radius: 6px;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        background-color: #106eea;
-    }
-
-    .copyrights {
-        margin: auto;
-        font-size: 15px;
-    }
-
-
-    .donut1 {
-        box-shadow: 0 7px 25px rgb(0 0 0 / 8%);
-        width: fit-content;
-        border: 1px solid lightgrey;
-        border-radius: 10px;
     }
 
     .graph_section1,
     .graph_section2,
     .graph_section3 {
-        gap: 10px;
-        display: flex;
         flex-direction: column;
-        margin: auto;
     }
+
+    .body_section {
+        overflow-x: scroll;
+    }
+
+    /* header  */
+
+    .companylogo {
+        height: 20%;
+        font-size: 25px;
+    }
+
+    .descrip {
+        font-size: 15px;
+    }
+
+    /* header  */
+
+    /* Footer */
+    .copyright {
+        font-size: 12px;
+    }
+
+    .contact-icons {
+        gap: 5px;
+        font-size: 20px;
+    }
+
+    .contact-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    /* Footer */
 }
 
 @media screen and (min-width: 768px) {
 
-    body {
-        width: 100%;
-        margin: 0;
-        line-height: 1 !important;
-        font-family: none !important;
-    }
-
-    .header {
-        height: 90px;
-        width: 100%;
-        z-index: 997;
-        border-bottom: 1px solid lightgrey;
-        display: flex;
-        background-color: white;
-        position: fixed;
-    }
-
-    .body_section {
-        padding-top: 100px;
-        gap: 10px;
-        display: flex;
-        flex-direction: column;
-        overflow-x: scroll;
-    }
-
-    .buttons {
-        height: 300px;
-        gap: 50px;
-        background-color: whitesmoke;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .navbartransition {
-        font-weight: 100;
-        display: inline-block;
-        font-size: large;
-    }
-
-    .navbartransition::after {
-        content: '';
-        width: 0px;
-        height: 3px;
-        transition: 300ms;
-        border-radius: 5px;
-        display: block;
-        background: #106eea;
-    }
-
-    .navbartransition:hover::after {
-        width: 100%;
-    }
-
-    .navbartransition:hover {
-        color: #106eea;
-    }
-
-    .logo {
-        width: 60%;
-        height: 50px;
-        margin: auto 65px;
-    }
-
-    .details {
-        width: 30%;
-        gap: 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .companylogo {
-        margin: 0;
-        height: 20px;
-        font-size: 35px;
-    }
-
-    a.slide-up {
-        animation: 1.5s slide-up;
-        margin-top: 0%;
-    }
-
-    @keyframes slide-up {
-        from {
-            margin-top: 20%;
-            height: 80%;
-            opacity: 0;
-        }
-
-        to {
-            margin-top: 0%;
-            height: 80%;
-            opacity: 1;
-        }
-    }
-
-    .box-icon {
-        color: #106eea;
-    }
-
-    .box {
-        width: 35%;
-        height: 80%;
-        border-radius: 5px;
-        gap: 10px;
-        line-height: 40px;
-        box-shadow: inset 0 -3px 0 -1px #106eea;
-        transition: box-shadow 0.5s ease-in-out;
-        color: black;
-        cursor: pointer;
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .box:hover {
-        box-shadow: inset 0 -500px 0 -1px #97f3ff;
-    }
-
-
-    .button-title {
-        font-size: 35px;
-    }
-
-    .contact {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        height: 45px;
-        background-color: white;
-    }
-
-    .contact-icons {
-        font-size: 30px;
-        width: 50%;
-        padding-left: 80px;
-        gap: 27px;
-        display: flex;
-        align-items: center;
-    }
-
-    .contact-icon {
-        color: white;
-        background-color: #106eea;
-        width: 13%;
-        height: 85%;
-        border-radius: 6px;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .copyrights {
-        margin: auto;
-        font-size: 15px;
-    }
-
-    .donut1 {
-        box-shadow: 0 7px 25px rgb(0 0 0 / 8%);
-        width: fit-content;
-        border: 1px solid lightgrey;
-        border-radius: 10px;
-    }
-
     .graph_section1,
     .graph_section2,
     .graph_section3 {
-        gap: 10px;
-        display: flex;
         flex-direction: column;
-        margin: auto;
-    }
-}
-
-@media screen and (min-width: 1024px) {
-
-    body {
-        width: 100%;
-        margin: 0;
-        line-height: 1 !important;
-        font-family: none !important;
-    }
-
-    .header {
-        height: 90px;
-        width: 100%;
-        z-index: 997;
-        border-bottom: 1px solid lightgrey;
-        display: flex;
-        background-color: white;
-        position: fixed;
-    }
-
-    .body_section {
-        padding-top: 100px;
-        gap: 10px;
-        display: flex;
-        flex-direction: column;
-        overflow-x: scroll;
-    }
-
-    .buttons {
-        height: 300px;
-        gap: 50px;
-        background-color: whitesmoke;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .navbartransition {
-        font-weight: 100;
-        display: inline-block;
-        font-size: large;
-    }
-
-    .navbartransition::after {
-        content: '';
-        width: 0px;
-        height: 3px;
-        transition: 300ms;
-        border-radius: 5px;
-        display: block;
-        background: #106eea;
-    }
-
-    .navbartransition:hover::after {
-        width: 100%;
-    }
-
-    .navbartransition:hover {
-        color: #106eea;
-    }
-
-    .logo {
-        width: 70%;
-        height: 50px;
-        margin: auto 65px;
-    }
-
-    .details {
-        width: 25%;
-        gap: 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .companylogo {
-        margin: 0;
-        height: 20px;
-        font-size: 35px;
-    }
-
-    a.slide-up {
-        animation: 1.5s slide-up;
-        margin-top: 0%;
-    }
-
-    @keyframes slide-up {
-        from {
-            margin-top: 20%;
-            height: 80%;
-            opacity: 0;
-        }
-
-        to {
-            margin-top: 0%;
-            height: 80%;
-            opacity: 1;
-        }
-    }
-
-    .box-icon {
-        color: #106eea;
-    }
-
-    .box {
-        width: 25%;
-        height: 75%;
-        border-radius: 5px;
-        gap: 10px;
-        cursor: pointer;
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        box-shadow: inset 0 -3px 0 -1px #106eea;
-        transition: box-shadow 0.5s ease-in-out;
-        color: black;
-        line-height: 40px;
-    }
-
-    .box:hover {
-        box-shadow: inset 0 -500px 0 -1px #97f3ff;
-    }
-
-
-    .button-title {
-        font-size: 35px;
-    }
-
-    .contact {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        height: 45px;
-        background-color: white;
-    }
-
-    .contact-icons {
-        font-size: 30px;
-        width: 50%;
-        padding-left: 80px;
-        gap: 27px;
-        display: flex;
-        align-items: center;
-    }
-
-    .contact-icon {
-        color: white;
-        background-color: #106eea;
-        width: 10%;
-        height: 85%;
-        border-radius: 6px;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .copyrights {
-        margin: auto;
-        font-size: 15px;
-    }
-
-    .donut1 {
-        box-shadow: 0 7px 25px rgb(0 0 0 / 8%);
-        width: fit-content;
-        border: 1px solid lightgrey;
-        border-radius: 10px;
-    }
-
-    .graph_section1,
-    .graph_section2,
-    .graph_section3 {
-        gap: 10px;
-        display: flex;
-        flex-direction: row;
-        margin: auto;
-    }
-}
-
-@media screen and (min-width: 1280px) {
-
-    body {
-        width: 100%;
-        margin: 0;
-        line-height: 1 !important;
-        font-family: none !important;
-    }
-
-    .header {
-        height: 90px;
-        width: 100%;
-        z-index: 997;
-        border-bottom: 1px solid lightgrey;
-        display: flex;
-        background-color: white;
-        position: fixed;
-    }
-
-    .body_section {
-        padding-top: 100px;
-        gap: 10px;
-        display: flex;
-        flex-direction: column;
-        overflow-x: scroll;
-    }
-
-    .buttons {
-        height: 300px;
-        gap: 50px;
-        background-color: whitesmoke;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .navbartransition {
-        font-weight: 100;
-        display: inline-block;
-        font-size: large;
-    }
-
-    .navbartransition::after {
-        content: '';
-        width: 0px;
-        height: 3px;
-        transition: 300ms;
-        border-radius: 5px;
-        display: block;
-        background: #106eea;
-    }
-
-    .navbartransition:hover::after {
-        width: 100%;
-    }
-
-    .navbartransition:hover {
-        color: #106eea;
-    }
-
-    .logo {
-        width: 75%;
-        height: 50px;
-        margin: auto 65px;
-    }
-
-    .details {
-        width: 20%;
-        gap: 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .companylogo {
-        margin: 0;
-        height: 20px;
-        font-size: 35px;
-    }
-
-    a.slide-up {
-        animation: 1.5s slide-up;
-        margin-top: 0%;
-    }
-
-    @keyframes slide-up {
-        from {
-            margin-top: 20%;
-            height: 80%;
-            opacity: 0;
-        }
-
-        to {
-            margin-top: 0%;
-            height: 80%;
-            opacity: 1;
-        }
-    }
-
-    .box-icon {
-        color: #106eea;
-    }
-
-    .box {
-        width: 18%;
-        height: 75%;
-        border-radius: 5px;
-        gap: 10px;
-        line-height: 40px;
-        box-shadow: inset 0 -3px 0 -1px #106eea;
-        transition: box-shadow 0.5s ease-in-out;
-        cursor: pointer;
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: black;
-    }
-
-    .box:hover {
-        box-shadow: inset 0 -500px 0 -1px #97f3ff;
-    }
-
-
-    .button-title {
-        font-size: 35px;
-    }
-
-    .contact {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        height: 45px;
-        background-color: white;
-    }
-
-    .contact-icons {
-        font-size: 30px;
-        width: 50%;
-        padding-left: 80px;
-        gap: 27px;
-        display: flex;
-        align-items: center;
-    }
-
-    .contact-icon {
-        color: white;
-        background-color: #106eea;
-        width: 6%;
-        height: 85%;
-        border-radius: 6px;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .copyrights {
-        font-size: 15px;
-        margin: auto 35px;
-        width: 50%;
-        text-align: end;
-    }
-
-    .donut1 {
-        box-shadow: 0 7px 25px rgb(0 0 0 / 8%);
-        width: fit-content;
-        border: 1px solid lightgrey;
-        border-radius: 10px;
-    }
-
-    .graph_section1,
-    .graph_section2,
-    .graph_section3 {
-        gap: 10px;
-        display: flex;
-        flex-direction: row;
-        margin: auto;
     }
 }

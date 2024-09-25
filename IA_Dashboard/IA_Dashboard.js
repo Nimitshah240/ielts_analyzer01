@@ -1,6 +1,10 @@
 const urlSearchParams = new URLSearchParams(window.location.search);
 const module = urlSearchParams.get('module');
 const user_id = JSON.parse(localStorage.getItem('user_data')).user_id;
+let screenwidth = screen.width;
+let width = 0;
+let height = 0;
+
 const exammap = new Map();
 const sections = new Map();
 sections.set('section1', 0);
@@ -28,6 +32,18 @@ async function connectedCallback() {
             fetch(`https://ieltsanalyzer.up.railway.app/api/examdata?user_id=${user_id}&module=${module}`)
                 .then(response => response.json())
                 .then(responsedata => {
+
+                    if (responsedata.length != 0) {
+                        Array.from(document.getElementsByClassName('graph')).forEach(element => {
+                            element.style.display = "block";
+                        });
+                        Array.from(document.getElementsByClassName('no_graph')).forEach(element => {
+                            element.style.display = "none";
+                        });
+                    } else {
+                        createToast('error', 'No data found');
+                    }
+
                     responseData = responsedata;
                     responseData.forEach(element => {
                         // FOR CHART 2 and 5
@@ -71,17 +87,22 @@ async function connectedCallback() {
                         }
 
                     });
-                })
-                .catch(error => console.error('Error:', error));
+                    google.charts.load('current', { 'packages': ['corechart'] });
+                    google.charts.load('current', { packages: ['gauge'] });
+                    google.charts.setOnLoadCallback(drawChart);
+                }).catch(error => createToast('error', error));
         });
-
-        google.charts.load('current', { 'packages': ['corechart'] });
-        google.charts.load('current', { packages: ['gauge'] });
-        google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
             try {
 
+                if (screenwidth >= 768) {
+                    height = 500;
+                    width = 500;
+                } else if (screenwidth <= 640) {
+                    height = 300;
+                    width = 300;
+                }
                 chart1();
                 chart2();
                 chart3();
@@ -122,6 +143,9 @@ function chart1() {
                 1: { color: 'blue' }
             },
             legend: { position: 'bottom' },
+            backgroundColor: 'transparent',
+            height: height,
+            width: width,
             title: 'Section wise correct'
 
         };
@@ -143,10 +167,11 @@ function chart2() {
         ]);
 
         var options2 = {
-            width: 500, height: 300,
             redFrom: 0, redTo: 8,
             yellowFrom: 9, yellowTo: 14,
             greenFrom: 15, greenTo: 20,
+            height: height,
+            width: width
         };
 
         var chart2 = new google.visualization.Gauge(document.getElementById('chart2'));
@@ -178,6 +203,9 @@ function chart3() {
                 1: { color: 'blue' }
             },
             legend: { position: 'bottom' },
+            backgroundColor: 'transparent',
+            height: height,
+            width: width,
             title: 'Section wise incorrect'
         };
         var chart = new google.visualization.PieChart(document.getElementById('chart3'));
@@ -217,6 +245,9 @@ function chart4() {
             title: "Total Correct / Question Type",
             bar: { groupWidth: "75%" },
             legend: { position: "none" },
+            backgroundColor: 'transparent',
+            height: height,
+            width: width,
             bars: 'vertical'
         };
         var chart = new google.visualization.BarChart(document.getElementById("chart4"));
@@ -241,7 +272,10 @@ function chart5() {
         var data = google.visualization.arrayToDataTable(setdata);
         var options = {
             title: 'Exam Performance',
-            legend: { position: 'bottom' }
+            legend: { position: 'bottom' },
+            height: height,
+            width: width,
+            backgroundColor: 'transparent'
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('chart5'));
@@ -276,10 +310,13 @@ function chart6() {
             2]);
 
         var options = {
-            title: "Total InCorrect / Question Type",
+            title: "Total Incorrect / Question Type",
             bar: { groupWidth: "75%" },
             legend: { position: "none" },
-            bars: 'vertical'
+            bars: 'vertical',
+            height: height,
+            width: width,
+            backgroundColor: 'transparent'
         };
         var chart = new google.visualization.BarChart(document.getElementById("chart6"));
         chart.draw(view, options);
@@ -361,6 +398,9 @@ function chart7() {
             legend: { position: 'bottom', maxLines: 10 },
             bar: { groupWidth: '75%' },
             isStacked: true,
+            height: height,
+            width: width,
+            backgroundColor: 'transparent',
             title: 'Correct Question / Section'
 
         };
@@ -444,6 +484,9 @@ function chart8() {
             legend: { position: 'bottom', maxLines: 10 },
             bar: { groupWidth: '75%' },
             isStacked: true,
+            height: height,
+            width: width,
+            backgroundColor: 'transparent',
             title: 'Incorrect Question / Section'
 
         };
@@ -527,6 +570,9 @@ function chart9() {
             legend: { position: 'bottom', maxLines: 10 },
             bar: { groupWidth: '75%' },
             isStacked: true,
+            height: height,
+            width: width,
+            backgroundColor: 'transparent',
             bars: 'vertical',
             title: 'Miss Question / Section'
         };
