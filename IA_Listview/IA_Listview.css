@@ -99,6 +99,18 @@ main {
 
 /* header  */
 
+.no_data {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: orangered;
+}
+
 .body_section {
     height: 94%;
     margin: 2%;
@@ -215,10 +227,6 @@ main {
 
     .descrip {
         font-size: 15px;
-    }
-
-    .navbartransition {
-        display: none;
     }
 
     /* header  */
