@@ -239,11 +239,15 @@ body {
 
     .companylogo {
         height: 20%;
-        font-size: 25px;
+        font-size: 22px;
     }
 
     .descrip {
-        font-size: 15px;
+        font-size: 12px;
+    }
+
+    .details {
+        gap: 15px;
     }
 
     /* buttons */
