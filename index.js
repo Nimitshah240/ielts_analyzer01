@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function connectedCallback(event) {
     try {
+        createToast('error', 'Website is currently underdevelopment.');
         signincheck(() => {
             fetchUserData();
         });
