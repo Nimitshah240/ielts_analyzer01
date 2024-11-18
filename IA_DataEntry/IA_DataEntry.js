@@ -7,6 +7,7 @@ let exam_name = (JSON.parse(localStorage.getItem('question' + tdExam))) == null 
 let exam_id = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_id;
 let user_data = JSON.parse(localStorage.getItem('user_data'));
 let user_id = user_data.user_id;
+let question_id = '';
 
 function connectedCallback() {
     try {
@@ -138,6 +139,7 @@ function popupclose(event) {
 // To get data on each save and new button click
 function getData(event) {
     try {
+
         const selectElement = document.getElementById('question' + event.target.id);
         const question_type = selectElement.value;
 
@@ -150,6 +152,7 @@ function getData(event) {
         incorrect = parseInt(document.getElementById('incorrect' + event.target.id).value);
         miss = parseInt(document.getElementById('miss' + event.target.id).value);
         total = correct + incorrect + miss;
+
 
         question.push(
             {
@@ -230,35 +233,62 @@ function saveexam(event) {
 
 function deletequestion(event) {
     try {
-        const question_id = event.target.id;
+        question_id = event.target.id;
 
-        fetch(`https://ieltsanalyzer.up.railway.app/api/deleteQuestion?question_id=${question_id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                for (let index = 0; index < 2; index++) {
-                    const divToRemove = document.getElementById(question_id);
-                    divToRemove.remove();
-                }
-
-                question.forEach((element, i) => {
-                    if (element.id == question_id) {
-                        question.splice(i, 1);
-                    }
-                });
-                localStorage.setItem('question' + tdExam, JSON.stringify(question))
-            })
-            .catch(error =>
-                createToast('error', 'Error while deleting data : ' + error.message));
+        Array.from(document.getElementsByClassName('glass')).forEach(element => {
+            element.style.backdropFilter = "none";
+        });
+        Array.from(document.getElementsByClassName('front-div')).forEach(element => {
+            element.style.display = "none";
+        });
+        Array.from(document.getElementsByClassName('delete-popup')).forEach(element => {
+            element.style.display = "block";
+        });
 
     } catch (error) {
         createToast('error', 'Error while deleting data : ' + error.message);
     }
 
+}
+
+function del(event) {
+    try {
+        if (event.target.id == 'yes') {
+            fetch(`https://ieltsanalyzer.up.railway.app/api/deleteQuestion?question_id=${question_id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    for (let index = 0; index < 2; index++) {
+                        const divToRemove = document.getElementById(question_id);
+                        divToRemove.remove();
+                    }
+
+                    question.forEach((element, i) => {
+                        if (element.id == question_id) {
+                            question.splice(i, 1);
+                        }
+                    });
+                    localStorage.setItem('question' + tdExam, JSON.stringify(question))
+                    createToast('success', 'Question deleted');
+                })
+                .catch(error =>
+                    createToast('error', 'Error while deleting data : ' + error.message));
+        }
+
+        Array.from(document.getElementsByClassName('glass')).forEach(element => {
+            element.style.backdropFilter = "blur(7.4px)";
+        });
+        Array.from(document.getElementsByClassName('delete-popup')).forEach(element => {
+            element.style.display = "none";
+        });
+
+    } catch (error) {
+        createToast('error', 'Error while deleting data : ' + error.message);
+    }
 }
 
 window.addEventListener("beforeunload", function (event) {

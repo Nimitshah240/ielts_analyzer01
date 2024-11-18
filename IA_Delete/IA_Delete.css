@@ -1,0 +1,164 @@
+.delete-pop {
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(7.4px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-delete,
+.footer-delete {
+    width: 40%;
+    height: 60px;
+    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.body-delete {
+    width: 40%;
+    height: 350px;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-delete {
+    font-size: 30px;
+    font-weight: 800;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.footer-delete {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* Button 63 */
+/* CSS */
+.button-63-delete {
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    background-image: linear-gradient(144deg, #AF40FF, #42a5f3 50%, #00DDEB);
+    color: #FFFFFF;
+    font-family: Phantomsans, sans-serif;
+    cursor: pointer;
+
+
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+
+}
+
+.button-63-delete:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0 35px 30px -5px;
+}
+
+.button-63-delete:active {
+    transform: translateY(4px);
+    box-shadow: rgba(0, 0, 0, 0.2) 0 25px 30px -5px;
+}
+
+.delete-icon {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.delete-text {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: 400;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.trash {
+    font-size: 100px;
+    width: 23%;
+    height: 85%;
+    border: 1px solid;
+    border-radius: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 640px) {
+
+    .header-delete,
+    .footer-delete {
+        width: 80%;
+    }
+
+    .body-delete {
+        height: 230px;
+        width: 80%;
+    }
+
+    .delete-text {
+        font-size: 23px;
+    }
+
+    .header-delete {
+        font-size: 25px;
+    }
+
+    .trash {
+        font-size: 50px;
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+    .footer-delete,
+    .header-delete,
+    .body-delete {
+        width: 60%;
+    }
+
+    .trash {
+        width: 32%;
+    }
+
+    .delete-text {
+        font-size: 26px;
+    }
+
+    .header-delete {
+        font-size: 28px;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .trash {
+        width: 29%;
+    }
+
+    .header-delete,
+    .body-delete,
+    .footer-delete {
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .trash {
+        width: 23%;
+    }
+}
