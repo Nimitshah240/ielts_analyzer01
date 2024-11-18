@@ -46,6 +46,17 @@ main {
 
 /* Glass */
 
+/* Delete */
+
+.delete-popup {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+}
+
+/* Delete */
+
 /* header */
 .header {
     height: 12%;

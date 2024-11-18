@@ -4,6 +4,7 @@ var savedexam = urlSearchParams.get('savedexam')
 var question;
 var exam;
 let data = [];
+var del_exam_id = '';
 
 function connectedCallback() {
     if (savedexam == 'yes') {
@@ -146,46 +147,69 @@ function examData() {
 
 function deleteexam(event) {
     try {
-        let exam_id = event.target.id;
+        del_exam_id = event.target.id;
+        Array.from(document.getElementsByClassName('body_section')).forEach(element => {
+            element.style.backdropFilter = "none";
+        });
+        Array.from(document.getElementsByClassName('delete-popup')).forEach(element => {
+            element.style.display = "block";
+        });
+    } catch (error) {
+        createToast('error', 'Error while deleting exam : ' + error.message);
+    }
+}
 
-        fetch(`https://ieltsanalyzer.up.railway.app/api/deleteExam?exam_id=${exam_id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => response.json())
-            .then(datas => {
-                const divToRemove = document.getElementById(exam_id);
-                divToRemove.remove();
-                data.forEach((element, i) => {
-                    if (element.exam_id == exam_id) {
-                        data.splice(i, 1);
-                    }
+function del(event) {
+    try {
+        if (event.target.id == 'yes') {
+            fetch(`https://ieltsanalyzer.up.railway.app/api/deleteExam?exam_id=${del_exam_id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(datas => {
+
+                    const divToRemove = document.getElementById(del_exam_id);
+                    divToRemove.remove();
+                    data.forEach((element, i) => {
+                        if (element.exam_id == del_exam_id) {
+                            data.splice(i, 1);
+                        }
+                    });
+
+                    let htmldata = '';
+                    data.forEach((element, index) => {
+                        htmldata +=
+                            '<div class="data" id=' + element.exam_id + '>' +
+                            '<div class="column index" onclick="openexam(event)" id=' + element.exam_id + '>' + (index + 1) + '</div>' +
+                            '<div class="column examname" onclick="openexam(event)" id=' + element.exam_id + '>' + element.exam_name + '</div>' +
+                            '<div class="column date" onclick="openexam(event)" id=' + element.exam_id + '>' + element.date + '</div>' +
+                            '<div class="column total" onclick="openexam(event)" id=' + element.exam_id + '>' + element.total + '</div>' +
+                            '<div class="column section" onclick="openexam(event)" id=' + element.exam_id + '>' + element["Section 1"] + '</div>' +
+                            '<div class="column section" onclick="openexam(event)" id=' + element.exam_id + '>' + element["Section 2"] + '</div>' +
+                            '<div class="column section" onclick="openexam(event)" id=' + element.exam_id + '>' + element["Section 3"] + '</div>' +
+                            '<div class="column section" onclick="openexam(event)" id=' + element.exam_id + '>' + element["Section 4"] + '</div>' +
+                            '<div class="column delete" onclick="deleteexam(event)" id=' + element.exam_id + `> <i class="fa fa-trash" id="${element.exam_id}" aria-hidden="true"></i>` +
+                            '</div>' +
+                            '</div>'
+                    });
+
+                    document.getElementById("table").innerHTML = htmldata;
+                    createToast('success', 'Exam deleted');
+                })
+                .catch(error => {
+                    createToast('error', 'Error while deleting exam : ' + error.message);
                 });
+        }
 
-                let htmldata = '';
-                data.forEach((element, index) => {
-                    htmldata +=
-                        '<div class="data" id=' + element.exam_id + '>' +
-                        '<div class="column index" onclick="openexam(event)" id=' + element.exam_id + '>' + (index + 1) + '</div>' +
-                        '<div class="column examname" onclick="openexam(event)" id=' + element.exam_id + '>' + element.exam_name + '</div>' +
-                        '<div class="column date" onclick="openexam(event)" id=' + element.exam_id + '>' + element.date + '</div>' +
-                        '<div class="column total" onclick="openexam(event)" id=' + element.exam_id + '>' + element.total + '</div>' +
-                        '<div class="column section" onclick="openexam(event)" id=' + element.exam_id + '>' + element["Section 1"] + '</div>' +
-                        '<div class="column section" onclick="openexam(event)" id=' + element.exam_id + '>' + element["Section 2"] + '</div>' +
-                        '<div class="column section" onclick="openexam(event)" id=' + element.exam_id + '>' + element["Section 3"] + '</div>' +
-                        '<div class="column section" onclick="openexam(event)" id=' + element.exam_id + '>' + element["Section 4"] + '</div>' +
-                        '<div class="column delete" onclick="deleteexam(event)" id=' + element.exam_id + `> <i class="fa fa-trash" id="${element.exam_id}" aria-hidden="true"></i>` +
-                        '</div>' +
-                        '</div>'
-                });
-
-                document.getElementById("table").innerHTML = htmldata;
-            }).catch(error => {
-                createToast('error', 'Error while deleting exam : ' + error.message);
-            });
-
+        Array.from(document.getElementsByClassName('body_section')).forEach(element => {
+            element.style.backdropFilter = "blur(7.4px)";
+        });
+        Array.from(document.getElementsByClassName('delete-popup')).forEach(element => {
+            element.style.display = "none";
+        });
     } catch (error) {
         createToast('error', 'Error while deleting exam : ' + error.message);
     }

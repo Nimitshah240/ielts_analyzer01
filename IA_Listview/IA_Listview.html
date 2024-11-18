@@ -12,11 +12,36 @@
     <script src='../signin.js'></script>
     <script src='../IA_Toast/IA_Toast.js'></script>
     <link rel='stylesheet' href='../IA_Toast/IA_Toast.css'>
+    <link rel='stylesheet' href='../IA_Delete/IA_Delete.css'>
 </head>
 
 <body onload="connectedCallback()">
     <div class="circle1"></div>
     <div class="circle2"></div>
+
+    <!-- Delete popup -->
+
+    <div class="delete-popup">
+        <div class="delete-pop">
+            <div class="header-delete"> DELETE </div>
+            <div class="body-delete">
+                <div class="delete-icon">
+                    <div class="trash">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="delete-text">
+                    Do you want to delete?
+                </div>
+            </div>
+            <div class="footer-delete">
+                <button class="button-63-delete" onclick="del(event)" role="button" id="yes">Delete</button>
+                <button class="button-63-delete" onclick="del(event)" role="button" id="no">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete popup -->
     <!-- Spinner -->
     <iframe src="../IA_Spinner/IA_Spinner.html" id="spinner" class="spinner" frameborder="0"></iframe>
     <!-- Spinner -->

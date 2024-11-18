@@ -39,6 +39,18 @@ main {
 
 /* Spinner */
 
+/* Delete */
+
+.delete-popup {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+}
+
+/* Delete */
+
+
 .glass {
     background: rgba(255, 255, 255, 0.19);
     border-radius: 16px;
