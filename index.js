@@ -136,6 +136,8 @@ function setHref(event) {
             dynamicUrl = '../IA_Selection/IA_Selection.html?type=data';
         } else if (buttonId == 'dashboard') {
             dynamicUrl = '../IA_Selection/IA_Selection.html?type=dashboard';
+        } else if (buttonId == 'tips') {
+            dynamicUrl = '../IA_Selection/IA_Selection.html?type=trick';
         }
 
         event.target.href = dynamicUrl;
