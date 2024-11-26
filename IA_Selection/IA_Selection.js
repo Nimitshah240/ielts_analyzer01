@@ -20,6 +20,8 @@ function setHrefs(event) {
             dynamicUrl = '../IA_Dashboard/IA_Dashboard.html';
         } else if (type == 'data') {
             dynamicUrl = '../IA_Listview/IA_Listview.html';
+        } else if (type == 'trick') {
+            dynamicUrl = '../IA_Trick/IA_Trick.html';
         }
         if (module == 'Reading') {
             dynamicUrl = dynamicUrl + '?module=Reading';

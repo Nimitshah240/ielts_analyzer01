@@ -1,0 +1,81 @@
+<html lang="en">
+
+<head>
+    <!-- <meta charset="UTF-8"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ielts Analyzer</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='./IA_Trick.js'></script>
+    <link rel='stylesheet' href='./IA_Trick.css'>
+    <script src='./IA_Question.js'></script>
+    <script src='../index.js'></script>
+    <script src='../IA_Toast/IA_Toast.js'></script>
+    <script src='../signin.js'></script>
+    <link rel='stylesheet' href='../IA_Toast/IA_Toast.css'>
+</head>
+
+<body onload="connectedCallbackTrick(event)">
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+
+    <!-- Spinner -->
+    <iframe src="../IA_Spinner/IA_Spinner.html" id="spinner" class="spinner" frameborder="0"></iframe>
+    <!-- Spinner -->
+    <!-- Toast -->
+    <ul class="notifications" id="notifications"> </ul>
+    <!-- Toast -->
+
+    <main id="main">
+        <div class="header glass">
+            <div class="logo">
+                <h1 class="companylogo"> IELTS <span style="color: #106eea;">Analyzer.</span></h1>
+                <h5 class="descrip">Score more than 8 bands</h5>
+            </div>
+            <div class="details">
+                <a class="navbartransition" href="../index.html">Home</a>
+                <i class="fa fa-google g-icon" id="not-log" style="font-size: 30px;" onclick="sigin()"
+                    aria-hidden="true"></i>
+                <img id="login-img" class="login-img" onclick="signout()" />
+            </div>
+        </div>
+        <div class="body-section">
+            <div class="glass box">
+                <div class="left-button" onclick="arrow(event)" id="left-button">
+                    <button class="button-63 left-arrow" role="button" id="left">
+                        <i class='fa fa-angle-left' style='font-size:24px' id="left-button"></i>
+                    </button>
+                </div>
+                <div class="trick-box" id="question-type">
+                    <!-- Question type, fact and approach goes here {js file} -->
+                </div>
+                <div class="right-button" onclick="arrow(event)" id="right-button">
+                    <button class="button-63 right-arrow" role="button" id="right">
+                        <i class='fa fa-angle-right' style='font-size:24px' id="right-button"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class=" footer">
+            <div class="copyright">
+                © Copyright Nimit Shah. All Rights Reserved.
+            </div>
+            <div class="contact-icons">
+                <a href="mailto:nimitshah240@gmail.com">
+                    <i class="fa fa-envelope-o contact-icon" aria-hidden="true"></i>
+                </a>
+                <a href="https://wa.me/6353756701">
+                    <i class="fa fa-whatsapp contact-icon" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.instagram.com/_nimittt_3000_/">
+                    <i class="fa fa-instagram contact-icon" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/nimit-shah-4623411b8/">
+                    <i class="fa fa-linkedin contact-icon" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
