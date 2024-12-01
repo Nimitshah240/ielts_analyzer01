@@ -18,12 +18,6 @@ sectionsincorrect.set('section2', 0);
 sectionsincorrect.set('section3', 0);
 sectionsincorrect.set('section4', 0);
 
-const sectionsmissed = new Map();
-sectionsmissed.set('section1', 0);
-sectionsmissed.set('section2', 0);
-sectionsmissed.set('section3', 0);
-sectionsmissed.set('section4', 0);
-
 const sectiontotal = new Map();
 sectiontotal.set('section1', 0);
 sectiontotal.set('section2', 0);
@@ -32,7 +26,6 @@ sectiontotal.set('section4', 0);
 
 let question_correct = new Map();
 let question_incorrect = new Map();
-let question_missed = new Map();
 let question_total = new Map();
 let responseData = [];
 
@@ -71,22 +64,18 @@ async function connectedCallback() {
                         if (element.section == 1) {
                             sectionscorrect.set('section1', sectionscorrect.get('section1') + element.correct);
                             sectionsincorrect.set('section1', sectionsincorrect.get('section1') + element.incorrect);
-                            sectionsmissed.set('section1', sectionsmissed.get('section1') + element.miss);
                             sectiontotal.set('section1', sectiontotal.get('section1') + element.total);
                         } else if (element.section == 2) {
                             sectionscorrect.set('section2', sectionscorrect.get('section2') + element.correct);
                             sectionsincorrect.set('section2', sectionsincorrect.get('section2') + element.incorrect);
-                            sectionsmissed.set('section2', sectionsmissed.get('section2') + element.miss);
                             sectiontotal.set('section2', sectiontotal.get('section2') + element.total);
                         } else if (element.section == 3) {
                             sectionscorrect.set('section3', sectionscorrect.get('section3') + element.correct);
                             sectionsincorrect.set('section3', sectionsincorrect.get('section3') + element.incorrect);
-                            sectionsmissed.set('section3', sectionsmissed.get('section3') + element.miss);
                             sectiontotal.set('section3', sectiontotal.get('section3') + element.total);
                         } else if (element.section == 4) {
                             sectionscorrect.set('section4', sectionscorrect.get('section4') + element.correct);
                             sectionsincorrect.set('section4', sectionsincorrect.get('section4') + element.incorrect);
-                            sectionsmissed.set('section4', sectionsmissed.get('section4') + element.miss);
                             sectiontotal.set('section4', sectiontotal.get('section4') + element.total);
                         }
 
@@ -104,13 +93,6 @@ async function connectedCallback() {
                             question_incorrect.set(element.question_type, element.incorrect);
                         }
 
-                        // FOR TIP || Question wise missed map
-                        if (question_missed.has(element.question_type)) {
-                            question_missed.set(element.question_type, question_missed.get(element.question_type) + element.miss)
-                        } else {
-                            question_missed.set(element.question_type, element.miss);
-                        }
-
                         // FOR TIP || Question wise total map
                         if (question_total.has(element.question_type)) {
                             question_total.set(element.question_type, question_total.get(element.question_type) + element.total)
@@ -122,7 +104,7 @@ async function connectedCallback() {
                     google.charts.load('current', { 'packages': ['corechart'] });
                     google.charts.load('current', { packages: ['gauge'] });
                     google.charts.setOnLoadCallback(drawChart);
-                }).catch(error => createToast('error', error));
+                }).catch(error => createToast('error 1', error));
         });
 
         function drawChart() {
