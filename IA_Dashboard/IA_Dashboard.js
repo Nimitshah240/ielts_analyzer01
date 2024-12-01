@@ -6,11 +6,11 @@ let width = 0;
 let height = 0;
 
 const exammap = new Map();
-const sections = new Map();
-sections.set('section1', 0);
-sections.set('section2', 0);
-sections.set('section3', 0);
-sections.set('section4', 0);
+const sectionscorrect = new Map();
+sectionscorrect.set('section1', 0);
+sectionscorrect.set('section2', 0);
+sectionscorrect.set('section3', 0);
+sectionscorrect.set('section4', 0);
 
 const sectionsincorrect = new Map();
 sectionsincorrect.set('section1', 0);
@@ -18,13 +18,20 @@ sectionsincorrect.set('section2', 0);
 sectionsincorrect.set('section3', 0);
 sectionsincorrect.set('section4', 0);
 
+const sectiontotal = new Map();
+sectiontotal.set('section1', 0);
+sectiontotal.set('section2', 0);
+sectiontotal.set('section3', 0);
+sectiontotal.set('section4', 0);
+
 let question_correct = new Map();
 let question_incorrect = new Map();
+let question_total = new Map();
 let responseData = [];
 
 async function connectedCallback() {
     try {
-        createToast('warning', 'Page is currently underdevelop');
+        // createToast('warning', 'Page is currently underdevelop');
 
         signincheck(() => {
             fetchUserData();
@@ -55,42 +62,49 @@ async function connectedCallback() {
 
                         // FOR CHART 1 and 3
                         if (element.section == 1) {
-                            sections.set('section1', sections.get('section1') + element.correct);
+                            sectionscorrect.set('section1', sectionscorrect.get('section1') + element.correct);
                             sectionsincorrect.set('section1', sectionsincorrect.get('section1') + element.incorrect);
-
+                            sectiontotal.set('section1', sectiontotal.get('section1') + element.total);
                         } else if (element.section == 2) {
-                            sections.set('section2', sections.get('section2') + element.correct);
+                            sectionscorrect.set('section2', sectionscorrect.get('section2') + element.correct);
                             sectionsincorrect.set('section2', sectionsincorrect.get('section2') + element.incorrect);
-
+                            sectiontotal.set('section2', sectiontotal.get('section2') + element.total);
                         } else if (element.section == 3) {
-                            sections.set('section3', sections.get('section3') + element.correct);
+                            sectionscorrect.set('section3', sectionscorrect.get('section3') + element.correct);
                             sectionsincorrect.set('section3', sectionsincorrect.get('section3') + element.incorrect);
-
+                            sectiontotal.set('section3', sectiontotal.get('section3') + element.total);
                         } else if (element.section == 4) {
-                            sections.set('section4', sections.get('section4') + element.correct);
+                            sectionscorrect.set('section4', sectionscorrect.get('section4') + element.correct);
                             sectionsincorrect.set('section4', sectionsincorrect.get('section4') + element.incorrect);
-
+                            sectiontotal.set('section4', sectiontotal.get('section4') + element.total);
                         }
 
-                        //  FOR CHART 4
+                        //  FOR CHART 4 || Question wise correct map
                         if (question_correct.has(element.question_type)) {
                             question_correct.set(element.question_type, question_correct.get(element.question_type) + element.correct)
                         } else {
                             question_correct.set(element.question_type, element.correct);
                         }
 
-                        // FOR CHART 6
+                        // FOR CHART 6 || Question wise incorrect map
                         if (question_incorrect.has(element.question_type)) {
                             question_incorrect.set(element.question_type, question_incorrect.get(element.question_type) + element.incorrect)
                         } else {
                             question_incorrect.set(element.question_type, element.incorrect);
                         }
 
+                        // FOR TIP || Question wise total map
+                        if (question_total.has(element.question_type)) {
+                            question_total.set(element.question_type, question_total.get(element.question_type) + element.total)
+                        } else {
+                            question_total.set(element.question_type, element.total);
+                        }
                     });
+
                     google.charts.load('current', { 'packages': ['corechart'] });
                     google.charts.load('current', { packages: ['gauge'] });
                     google.charts.setOnLoadCallback(drawChart);
-                }).catch(error => createToast('error', error));
+                }).catch(error => createToast('error 1', error));
         });
 
         function drawChart() {
@@ -127,10 +141,10 @@ function chart1() {
         // 1st Chart ------------------------------------------------------
         var data = google.visualization.arrayToDataTable([
             ['Section', 'Correct'],
-            ['SECTION 1', parseInt(sections.get('section1'))],
-            ['SECTION 2', parseInt(sections.get('section2'))],
-            ['SECTION 3', parseInt(sections.get('section3'))],
-            ['SECTION 4', parseInt(sections.get('section4'))],
+            ['SECTION 1', parseInt(sectionscorrect.get('section1'))],
+            ['SECTION 2', parseInt(sectionscorrect.get('section2'))],
+            ['SECTION 3', parseInt(sectionscorrect.get('section3'))],
+            ['SECTION 4', parseInt(sectionscorrect.get('section4'))],
         ]);
 
         var options = {
@@ -167,8 +181,8 @@ function chart2() {
         ]);
 
         var options2 = {
-            redFrom: 0, redTo: 8,
-            yellowFrom: 9, yellowTo: 14,
+            redFrom: 0, redTo: 5,
+            yellowFrom: 6, yellowTo: 14,
             greenFrom: 15, greenTo: 20,
             height: height,
             width: width
@@ -583,6 +597,188 @@ function chart9() {
 
     } catch (error) {
         createToast('error', 'Error while loading chart 9 : ' + error.message)
+    }
+}
+
+function tipopen(event) {
+    try {
+
+        Array.from(document.getElementsByClassName('glass')).forEach(element => {
+            element.style.backdropFilter = "none";
+        });
+
+        // This portion is used to check question wise details
+        var correctquest = 0;
+        let excellentlist = [];
+        let goodlist = [];
+        let avglist = [];
+        let poorlist = [];
+        for (let key of question_total.keys()) {
+            correctquest = question_correct.get(key) * 100 / question_total.get(key);
+
+            if (correctquest >= 80) {
+                excellentlist.push(key);
+            } else if (correctquest < 80 && correctquest >= 70) {
+                goodlist.push(key);
+            } else if (correctquest < 70 && correctquest >= 60) {
+                avglist.push(key);
+            } else {
+                poorlist.push(key);
+            }
+        }
+        // ----------------------------------------------------------------------------------
+
+        // This portion is used to check section wise details
+        correctquest = 0;
+        let goodlistsect = [];
+        let poorlistsect = [];
+        for (let key of sectiontotal.keys()) {
+            correctquest = sectionscorrect.get(key) * 100 / sectiontotal.get(key);
+
+            if (correctquest >= 75) {
+                goodlistsect.push(key.charAt(0).toUpperCase() + key.slice(1));
+            } else if (correctquest < 75) {
+                poorlistsect.push(key.charAt(0).toUpperCase() + key.slice(1));
+            }
+        }
+        // ----------------------------------------------------------------------------------
+
+
+        // This portion is used to set Tip popup
+        var tip_popup = document.getElementById('tip-popup');
+        tip_popup.style.display = "flex"
+
+        // Excellent question type
+        if (excellentlist.length > 0) {
+            document.getElementById('excellent').innerHTML = ` You have performed exceptionally 
+            well in<span class="list"> ${excellentlist}</span>. Keep up the great work!`;
+        } else {
+            document.getElementById('excellent').innerHTML = ' - ';
+        }
+
+        // Good question type
+        if (goodlist.length > 0) {
+            document.getElementById('good').innerHTML = ` You are doing well in<span class="list">
+             ${goodlist}</span>. With a little more practice, you can excel further.`;
+        } else {
+            document.getElementById('good').innerHTML = ' - ';
+        }
+
+        // Average question type
+        if (avglist.length > 0) {
+            document.getElementById('average').innerHTML = ` Your performance in<span class="list"> 
+            ${avglist}</span> is moderate.Focus on improving this area to achieve better results.`;
+        } else {
+            document.getElementById('average').innerHTML = ' - ';
+        }
+
+        // Poor question type
+        if (poorlist.length > 0) {
+            document.getElementById('poor').innerHTML = ` There is room for growth in<span class="list"> 
+            ${poorlist}</span>. Consider dedicating more time and effort to enhance your skills here.`;
+        } else {
+            document.getElementById('poor').innerHTML = ' - ';
+        }
+
+        let sectiontext = '';
+
+        // Mixture of performance in all section
+        if (goodlistsect.length > 0 && poorlistsect.length > 0) {
+            sectiontext += `It is evident that your performance in <span class="list"> ${goodlistsect}</span> is excellent, while there is significant room for improvement in<span class="list"> ${poorlistsect}</span>.`
+        }
+        // Bad perfomance in all section
+        if (poorlistsect.length > 0 && goodlistsect.length == 0) {
+            sectiontext += `It is evident that your performance in <span class="list"> ${poorlistsect}</span> is very poor, with no strong performance in any section.`
+        }
+        // Good performance in all section
+        if (goodlistsect.length > 0 && poorlistsect.length == 0) {
+            sectiontext = 'It is evident that your performance is outstanding across all sections, with no weak areas to note.'
+        }
+
+        // Set Section wise tip
+        document.getElementById('section-summary').innerHTML = sectiontext
+
+        // Setting href for Trick anchor tag
+        let href = "../IA_Trick/IA_Trick.html?module=";
+        if (module == 'Listening') {
+            href += 'Listening';
+        } else {
+            href += 'Reading';
+        }
+        document.getElementById('trick').href = href
+
+
+
+
+        
+        // // This portion is used to identify maximum miss and wrong question
+        // let incorrectquestionlist = [];
+        // let incorrectquestionmarkslist = [];
+        // let missquestionlist = [];
+        // let missquestionmarkslist = [];
+        // let index0;
+        // let index1;
+
+        // for (let key of question_total.keys()) {
+        //     incorrectquest = question_incorrect.get(key) * 100 / question_total.get(key);
+        //     missquest = question_missed.get(key) * 100 / question_total.get(key);
+
+        //     if (incorrectquestionlist.length < 2) {
+        //         if (incorrectquest != 0) {
+        //             incorrectquestionlist.push(key)
+        //             incorrectquestionmarkslist.push(incorrectquest);
+        //         }
+        //     } else {
+        //         index0 = incorrectquestionmarkslist.at(0);
+        //         index1 = incorrectquestionmarkslist.at(1);
+        //         if (index0 < incorrectquest && index0 <= index1) {
+        //             incorrectquestionmarkslist.splice(0, 1);
+        //             incorrectquestionlist.splice(0, 1);
+        //             incorrectquestionlist.push(key);
+        //             incorrectquestionmarkslist.push(incorrectquest);
+        //         } else if (index1 < incorrectquest && index1 <= index0) {
+        //             incorrectquestionmarkslist.splice(1, 1);
+        //             incorrectquestionlist.splice(1, 1);
+        //             incorrectquestionlist.push(key);
+        //             incorrectquestionmarkslist.push(incorrectquest);
+        //         }
+        //     }
+
+        //     if (missquestionlist.length < 2) {
+        //         if (missquest != 0) {
+        //             missquestionlist.push(key)
+        //             missquestionmarkslist.push(missquest);
+        //         }
+        //     } else {
+        //         index0 = missquestionmarkslist.at(0);
+        //         index1 = missquestionmarkslist.at(1);
+        //         if (index0 < missquest && index0 <= index1) {
+        //             missquestionmarkslist.splice(0, 1);
+        //             missquestionlist.splice(0, 1);
+        //             missquestionlist.push(key);
+        //             missquestionmarkslist.push(missquest);
+        //         } else if (index1 < missquest && index1 <= index0) {
+        //             missquestionmarkslist.splice(1, 1);
+        //             missquestionlist.splice(1, 1);
+        //             missquestionlist.push(key);
+        //             missquestionmarkslist.push(missquest);
+        //         }
+        //     }
+        // }
+    } catch (error) {
+        createToast('error', 'Failed to open Tip. Try refreshing page.');
+    }
+}
+
+function tipclose(event) {
+    try {
+        Array.from(document.getElementsByClassName('glass')).forEach(element => {
+            element.style.backdropFilter = "blur(7.4px)";
+        });
+        var tip_popup = document.getElementById('tip-popup');
+        tip_popup.style.display = "none"
+    } catch (error) {
+        console.error(error);
     }
 }
 

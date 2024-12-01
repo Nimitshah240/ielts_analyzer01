@@ -31,7 +31,8 @@
                 <h5 class="descrip">Score more than 8 bands</h5>
             </div>
             <div class="details">
-                <a class="navbartransition" href="../index.html">Home</a>
+                <button class="button-63 tip-open-button" onclick="tipopen(event)">TIP</button>
+                <a class=" navbartransition" href="../index.html">Home</a>
                 <i class="fa fa-google g-icon" id="not-log" style="font-size: 30px;" onclick="sigin()"
                     aria-hidden="true"></i>
                 <img id="login-img" class="login-img" onclick="signout()" />
@@ -39,47 +40,77 @@
         </div>
 
         <div class="body_section">
+            <div class="tip-popup" id="tip-popup">
+                <div class="tip-box">
+                    <h4 class="tip-header"><b>Your IELTS Performance Summary</b></h4>
+                    <br>
+                    <ul>
+                        <li>
+                            <b>Excellent:</b><span id="excellent"></span>
+                        </li>
+                        <br>
+                        <li>
+                            <b>Good:</b><span id="good"></span>
+                        </li>
+                        <br>
+                        <li>
+                            <b>Average:</b> <span id="average"></span>
+                        </li>
+                        <br>
+                        <li>
+                            <b> Needs Improvement:</b> <span id="poor"></span>
+                        </li>
+                        <br>
+                    </ul>
+                    <span id="section-summary"></span><br><br>
+                    Remember, consistent practice and targeted improvement will help you achieve your desired band
+                    score! Enhance your performance by exploring our dedicated <a id="trick"><span
+                            style="color:blue">Tricks</span></a> section.<br><br>
+                    <div class="popupclose-div"><button class="button-63 popupclose-button"
+                            onclick="tipclose(event)">Close</button></div>
+                </div>
+            </div>
             <div class="no_graph">
                 No Data Found !
             </div>
             <!-- CHANGES FOR GRAPH SHOULD BE DONE HERE -->
             <div class="graph_section1 graph">
                 <div class="donut1">
-                    <div id="chart1" style="" class="glass"></div>
+                    <div id="chart1" class="glass"></div>
                 </div>
 
                 <div class="donut1">
-                    <div id="chart2" style="" class="glass"></div>
+                    <div id="chart2" class="glass"></div>
                 </div>
 
                 <div class="donut1">
-                    <div id="chart3" style="" class="glass"></div>
+                    <div id="chart3" class="glass"></div>
                 </div>
             </div>
 
             <div class="graph_section2 graph">
                 <div class="donut1">
-                    <div id="chart4" style="" class="glass"></div>
+                    <div id="chart4" class="glass"></div>
                 </div>
 
                 <div class="donut1">
-                    <div id="chart5" style="" class="glass"></div>
+                    <div id="chart5" class="glass"></div>
                 </div>
 
                 <div class="donut1">
-                    <div id="chart6" style="" class="glass"></div>
+                    <div id="chart6" class="glass"></div>
                 </div>
             </div>
 
             <div class="graph_section3 graph">
                 <div class="donut1">
-                    <div id="chart7" style="" class="glass"></div>
+                    <div id="chart7" class="glass"></div>
                 </div>
                 <div class="donut1">
-                    <div id="chart8" style="" class="glass"></div>
+                    <div id="chart8" class="glass"></div>
                 </div>
                 <div class="donut1">
-                    <div id="chart9" style="" class="glass"></div>
+                    <div id="chart9" class="glass"></div>
                 </div>
             </div>
         </div>

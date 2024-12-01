@@ -226,6 +226,80 @@ a.slide-up {
 
 /* Footer */
 
+/* Button 63 */
+/* CSS */
+.button-63 {
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    background-image: linear-gradient(144deg, #AF40FF, #42a5f3 50%, #00DDEB);
+    color: #FFFFFF;
+    font-family: Phantomsans, sans-serif;
+    cursor: pointer;
+}
+
+.button-63:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0 35px 30px -5px;
+}
+
+.button-63:active {
+    transform: translateY(4px);
+    box-shadow: rgba(0, 0, 0, 0.2) 0 25px 30px -5px;
+}
+
+.tip-open-button {
+    width: 12%;
+    height: 30%;
+    font-weight: bold;
+}
+
+.tip-popup {
+    width: 100%;
+    height: fit-content;
+    z-index: 1;
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.tip-box {
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.19);
+    border-radius: 16px;
+    padding-left: 25px;
+    padding-right: 25px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.4px);
+    -webkit-backdrop-filter: blur(7.4px);
+    border: 1px solid rgba(255, 255, 255, 1);
+    text-align: justify;
+}
+
+.list {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.popupclose-div {
+    width: 100%;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popupclose-button {
+    width: 50px;
+    height: 30px;
+}
+
+.tip-header {
+    width: 100%;
+    text-align: center;
+}
+
 @media screen and (max-width: 640px) {
 
     a.slide-up {
@@ -285,6 +359,23 @@ a.slide-up {
     }
 
     /* Footer */
+
+    /* Tip popup */
+    .tip-box {
+        width: 80%;
+        height: 570px;
+        overflow-y: scroll;
+    }
+
+    .tip-popup {
+        height: fit-content;
+    }
+
+    .tip-open-button {
+        width: 30%;
+        height: 35%;
+        padding: 5px;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -293,5 +384,15 @@ a.slide-up {
     .graph_section2,
     .graph_section3 {
         flex-direction: column;
+    }
+
+    .tip-open-button {
+        width: 20%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .tip-open-button {
+        width: 12%;
     }
 }
