@@ -13,7 +13,7 @@
     <script src='../IA_Toast/IA_Toast.js'></script>
     <link rel='stylesheet' href='../IA_Toast/IA_Toast.css'>
 </head>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body onload="connectedCallback()">
 
@@ -38,7 +38,6 @@
                 <img id="login-img" class="login-img" onclick="signout()" />
             </div>
         </div>
-
         <div class="body_section">
             <div class="tip-popup" id="tip-popup">
                 <div class="tip-box">
@@ -73,47 +72,86 @@
             <div class="no_graph">
                 No Data Found !
             </div>
-            <!-- CHANGES FOR GRAPH SHOULD BE DONE HERE -->
-            <div class="graph_section1 graph">
-                <div class="donut1">
-                    <div id="chart1" class="glass"></div>
+            <div class="charts">
+                <div class="chart-section-1">
+                    <div class="chart-section-1-1">
+                        <div class="chart-section-1-1-1">
+                            <!-- Line Chart/ Exam performance -->
+                            <canvas id="chart5" class="glass"></canvas>
+                        </div>
+                        <div class="chart-section-1-1-2">
+                            <!-- Counts -->
+                            <div class="count-box exam-count glass">
+                                <!-- Exam Count -->
+                                <div class="wave-container wave-container1">
+                                    <span id="examcount">-</span>
+                                </div>
+                                <div class="wave wave1">
+                                    Total Exams
+                                </div>
+
+                            </div>
+                            <div class="count-box question-count glass">
+                                <!-- Question count  -->
+                                <div class="wave-container wave-container2">
+                                    <span id="totalquestion">-</span>
+                                </div>
+                                <div class="wave wave2">
+                                    Total Questions Attempt
+                                </div>
+                            </div>
+                            <div class="count-box avg-band glass">
+                                <!-- Average band -->
+                                <div class="wave-container wave-container3">
+                                    <span id="avg-band">-</span>
+                                </div>
+                                <div class="wave wave3">
+                                    Average Band
+                                </div>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    <div class="chart-section-1-2">
+                        <!-- Doughnuts -->
+                        <div class="Doughnut">
+                            <!-- Section wise correct  -->
+                            <canvas id="chart1" class="glass"></canvas>
+                        </div>
+                        <div class="Doughnut">
+                            <!-- Section wise incorrect -->
+                            <canvas id="chart3" class="glass"></canvas>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="donut1">
-                    <div id="chart2" class="glass"></div>
+                <div class="chart-section-2">
+                    <!-- Question Type/section -->
+                    <div class="color-bar">
+                        <!-- Correct question type / section -->
+                        <canvas id="chart7" class="glass"></canvas>
+                    </div>
+                    <div class="color-bar">
+                        <!-- Incorrect question type / section -->
+                        <canvas id="chart8" class="glass"></canvas>
+                    </div>
+                    <div class="color-bar">
+                        <!-- Missed question type / section -->
+                        <canvas id="chart9" class="glass"></canvas>
+                    </div>
                 </div>
+                <div class="chart-section-3">
+                    <div class="black-bar">
+                        <!--Correct Question Type -->
+                        <canvas id="chart4" class="glass column"></canvas>
+                    </div>
+                    <div class="black-bar">
+                        <!--Incorrect Question type -->
+                        <canvas id="chart6" class="glass column"></canvas>
 
-                <div class="donut1">
-                    <div id="chart3" class="glass"></div>
+                    </div>
                 </div>
             </div>
-
-            <div class="graph_section2 graph">
-                <div class="donut1">
-                    <div id="chart4" class="glass"></div>
-                </div>
-
-                <div class="donut1">
-                    <div id="chart5" class="glass"></div>
-                </div>
-
-                <div class="donut1">
-                    <div id="chart6" class="glass"></div>
-                </div>
-            </div>
-
-            <div class="graph_section3 graph">
-                <div class="donut1">
-                    <div id="chart7" class="glass"></div>
-                </div>
-                <div class="donut1">
-                    <div id="chart8" class="glass"></div>
-                </div>
-                <div class="donut1">
-                    <div id="chart9" class="glass"></div>
-                </div>
-            </div>
-        </div>
         </div>
 
         <div class=" footer">
