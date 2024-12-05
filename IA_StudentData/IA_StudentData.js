@@ -16,7 +16,7 @@ function checkuser() {
     try {
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
-        fetch(`http://localhost:3000/api/studentdata?username=${username}&password=${password}`)
+        fetch(`https://ieltsanalyzer.up.railway.app/api/studentdata?username=${username}&password=${password}`)
             .then(response => response.json())
             .then(responsedata => {
 
