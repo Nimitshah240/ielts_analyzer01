@@ -145,7 +145,7 @@ body {
     height: 700pc;
     width: 100%;
     gap: 15px;
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 
@@ -219,7 +219,7 @@ body {
     height: 50% !important;
 }
 
-.column {
+.chart4-6 {
     width: 100% !important;
     height: 30rem !important;
 }
@@ -546,7 +546,7 @@ body {
         width: 100%;
     }
 
-    .column {
+    .chart4-6 {
         height: 24rem !important;
     }
 
@@ -585,7 +585,7 @@ body {
         font-size: 16px;
     }
 
-    .column {
+    .chart4-6 {
         height: 23rem !important;
     }
 }

@@ -43,10 +43,9 @@ async function connectedCallback() {
             fetch(`https://ieltsanalyzer.up.railway.app/api/examdata?user_id=${user_id}&module=${module}`)
                 .then(response => response.json())
                 .then(responsedata => {
-
                     if (responsedata.length != 0) {
-                        Array.from(document.getElementsByClassName('graph')).forEach(element => {
-                            element.style.display = "block";
+                        Array.from(document.getElementsByClassName('charts')).forEach(element => {
+                            element.style.display = "flex";
                         });
                         Array.from(document.getElementsByClassName('no_graph')).forEach(element => {
                             element.style.display = "none";
