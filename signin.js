@@ -112,23 +112,12 @@ async function signincheck(callback) {
     }
 }
 
-function signout() {
+function signout(event) {
     try {
-
-        let access_token = localStorage.getItem('authInfo');
-        fetch("https://oauth2.googleapis.com/revoke?token=" + access_token, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/x-www-form-urlencoded'
-            }
-        })
-            .then(() => {
-                createToast('success', 'You are successfully signout');
-                localStorage.removeItem('authInfo');
-                localStorage.removeItem('user_data');
-                document.getElementById('not-log').style.display = 'block';
-                document.getElementById('login-img').style.display = 'none';
-            })
+        let domain = new URL(window.location.href).origin;
+        domain += '/IA_Code/IA_Signout/IA_Signout.html';
+        event.target.href = domain;
+        window.location.href = domain;
     } catch (error) {
         console.error(error);
     }
