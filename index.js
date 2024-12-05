@@ -158,7 +158,7 @@ function sendemail() {
         var re = /\S+@\S+\.\S+/;
 
         if (data.name != '' && data.email != '' && re.test(email)) {
-            fetch('http://localhost:3000/api/feedback', {
+            fetch('https://ieltsanalyzer.up.railway.app/api/feedback', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
