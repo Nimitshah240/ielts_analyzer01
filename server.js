@@ -182,6 +182,22 @@ app.get('/api/studentdata', (req, res) => {
     }
 });
 
+app.post('/api/feedback', (req, res) => {
+    const receivedData = req.body;
+    const user_id = receivedData.user_id;
+    const name = receivedData.name;
+    const email = receivedData.email;
+    const message = receivedData.message;
+    let query = `INSERT INTO feedback (user_id, name, email, message) VALUES ('${user_id}', '${name}','${email}', '${message}');`;
+    connection.execute(query, (error, results, fields) => {
+        if (error) {
+            console.error(error);
+        } else {
+            res.json(results);
+        }
+    });
+});
+
 
 app.listen(PORT, () => {
 
