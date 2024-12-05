@@ -107,6 +107,7 @@ app.delete('/api/deleteExam', (req, res) => {
 });
 
 app.post('/api/insertExam', (req, res) => {
+
     let exam_id = req.headers.exam_id;
     const receivedData = req.body;
     let exam_query = `INSERT INTO exam (user_id, exam_name, date, module, band) VALUES (${receivedData[0].user_id}, '${receivedData[0].exam_name}', '${receivedData[0].date}', '${receivedData[0].module}', ${receivedData[0].band}) `;
@@ -157,11 +158,34 @@ app.delete('/api/deleteQuestion', (req, res) => {
     res.json(question_id);
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on https://ieltsanalyzer.up.railway.app${PORT}`);
+app.get('/api/studentdata', (req, res) => {
+    const username = req.query.username;
+    const password = req.query.password;
+    
+    // Currently static but later must create Table of this such user
+    if (username == 'Nimit' && password == "Shah") {
+        
+        // Currently static but later must create Table of this such user
+        let query = 'SELECT * FROM user LEFT JOIN exam ON user.id = exam.user_id GROUP BY user.id';
+        query = `SELECT user.*, COUNT(CASE WHEN exam.module = 'listening' THEN 1 END) AS listening_count,
+                COUNT(CASE WHEN exam.module = 'reading' THEN 1 END) AS reading_count FROM user 
+                LEFT JOIN exam ON user.id = exam.user_id GROUP BY user.id`;
+
+        connection.execute(query, (error, results, fields) => {
+            
+            if (error) {
+                console.error(error);
+            } else {
+                res.json(results);
+            }
+        });
+    } else {
+        res.json('Invalid User');
+    }
 });
 
-app.get('/apitester', (req, res) => {
-    let ress = 'abc';
-    res.json(ress);
+
+app.listen(PORT, () => {
+
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

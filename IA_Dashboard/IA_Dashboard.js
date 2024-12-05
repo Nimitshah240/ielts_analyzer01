@@ -1,6 +1,12 @@
 const urlSearchParams = new URLSearchParams(window.location.search);
 const module = urlSearchParams.get('module');
-const user_id = JSON.parse(localStorage.getItem('user_data')).user_id;
+const teachermode = urlSearchParams.get('teacher');
+let user_id;
+if (teachermode == 'true') {
+    user_id = JSON.parse(localStorage.getItem('student_id'));
+} else {
+    user_id = JSON.parse(localStorage.getItem('user_data')).user_id;
+}
 
 const exammap = new Map();
 const sectionscorrect = new Map();
