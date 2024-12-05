@@ -148,23 +148,38 @@ function setHref(event) {
     }
 }
 
-function sendemail(params) {
+function sendemail() {
     try {
-        Email.send({
-            SecureToken: "6ea86d2a-ad55-4617-9e3d-67b7521e104b",
-            To: 'nimitshah240@gmail.com',
-            From: "nimitshah240@gmail.com",
-            Subject: "This is the subject",
-            Body: "And this is the body"
-        }).then(
-            message => alert(message)
-        );
+        let user_id = ((localStorage.getItem('user_data'))) == null ? "" : JSON.parse(localStorage.getItem('user_data')).user_id;
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var message = document.getElementById('message').value;
+        let data = { 'user_id': user_id, 'name': name, 'email': email, 'message': message };
+        var re = /\S+@\S+\.\S+/;
 
+        if (data.name != '' && data.email != '' && re.test(email)) {
+            fetch('https://ieltsanalyzer.up.railway.app/api/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(() => {
+                    name = document.getElementById('name').value = '';
+                    email = document.getElementById('email').value = '';
+                    message = document.getElementById('message').value = '';
+                    createToast('success', 'Thank you for your feedback');
+                })
+                .catch(error => createToast('error', 'Error while sending email : ' + error.message));
+
+        } else {
+            createToast('error', 'Please fill required data');
+        }
 
     } catch (error) {
         createToast('error', 'Error while sending email : ' + error.message);
     }
-
 }
 
 window.addEventListener("beforeunload", function (event) {
