@@ -161,18 +161,16 @@ app.delete('/api/deleteQuestion', (req, res) => {
 app.get('/api/studentdata', (req, res) => {
     const username = req.query.username;
     const password = req.query.password;
-    
+
     // Currently static but later must create Table of this such user
     if (username == 'Nimit' && password == "Shah") {
-        
         // Currently static but later must create Table of this such user
-        let query = 'SELECT * FROM user LEFT JOIN exam ON user.id = exam.user_id GROUP BY user.id';
-        query = `SELECT user.*, COUNT(CASE WHEN exam.module = 'listening' THEN 1 END) AS listening_count,
+        let query = `SELECT user.*, COUNT(CASE WHEN exam.module = 'listening' THEN 1 END) AS listening_count,
                 COUNT(CASE WHEN exam.module = 'reading' THEN 1 END) AS reading_count FROM user 
                 LEFT JOIN exam ON user.id = exam.user_id GROUP BY user.id`;
 
         connection.execute(query, (error, results, fields) => {
-            
+
             if (error) {
                 console.error(error);
             } else {
