@@ -153,6 +153,33 @@ main {
     background-color: #106eea;
 }
 
+/* Button 63 */
+/* CSS */
+.button-63 {
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    background-image: linear-gradient(144deg, #AF40FF, #42a5f3 50%, #00DDEB);
+    color: #FFFFFF;
+    font-family: Phantomsans, sans-serif;
+    cursor: pointer;
+}
+
+.button-63:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0 35px 30px -5px;
+}
+
+.button-63:active {
+    transform: translateY(4px);
+    box-shadow: rgba(0, 0, 0, 0.2) 0 25px 30px -5px;
+}
+
+.tip-open-button {
+    width: 12%;
+    height: 30%;
+    font-weight: bold;
+}
+
 /* footer */
 .footer {
     height: 50px;
@@ -246,6 +273,13 @@ main {
     }
 
     /* header  */
+
+
+    .tip-open-button {
+        width: 30%;
+        height: 35%;
+        padding: 5px;
+    }
 
     .list {
         height: 88%;
@@ -341,6 +375,10 @@ main {
         font-family: none !important;
     }
 
+    .tip-open-button {
+        width: 20%;
+    }
+
     .list {
         height: 88%;
         overflow-y: scroll;
@@ -420,6 +458,10 @@ main {
 
     .body_section {
         padding: 3% 1% 0%;
+    }
+
+    .tip-open-button {
+        width: 12%;
     }
 
     .list {

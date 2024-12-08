@@ -2,24 +2,22 @@ const urlSearchParams = new URLSearchParams(window.location.search);
 var module = urlSearchParams.get('module');
 var tdExam = urlSearchParams.get('tdExam')
 var question = [];
+
 question = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? [] : JSON.parse(localStorage.getItem('question' + tdExam));
 let exam_name = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_name;
 let exam_id = (JSON.parse(localStorage.getItem('question' + tdExam))) == null ? "" : JSON.parse(localStorage.getItem('question' + tdExam))[0].exam_id;
 let user_data = JSON.parse(localStorage.getItem('user_data'));
-let user_id = user_data.user_id;
+user_id = user_data.user_id;
 let question_id = '';
 
-function connectedCallback() {
+function dataentryconnectedCallback() {
     try {
-        createToast('warning', 'Page is currently underdevelop');
 
         if (!JSON.parse(localStorage.getItem('user_data'))) {
             createToast('error', 'Please login first')
         }
         sectionsetter();
-        signincheck(() => {
-            fetchUserData();
-        });
+        Userlogo();
     } catch (error) {
         createToast('error', 'Error while loading : ' + error.message);
     }
@@ -70,7 +68,6 @@ function sectionsetter() {
             }
         }
 
-
     } catch (error) {
         createToast('error', 'Error while setting data : ' + error.message);
     }
@@ -104,7 +101,7 @@ function popupopen(event) {
                         '<td>' + element.incorrect + '</td>' +
                         '<td>' + element.miss + '</td>' +
                         '<td> ' + element.total + ' </td>' +
-                        `<td class="delete-icon" id = ${element.id} onclick="deletequestion(event)"><i class="fa fa-trash" aria-hidden="true"id=${element.id}></i> </td> </tr>`;
+                        `<td id = ${element.id} onclick="deletequestion(event)"><i class="fa fa-trash" aria-hidden="true"id=${element.id}></i> </td> </tr>`;
                 }
             });
             document.getElementById('show-div').style.display = 'flex';
@@ -121,9 +118,7 @@ function popupclose(event) {
     try {
         var type = event.target.id;
         if (type == 'save') {
-            // document.getElementById('save-div').style.display = 'none';
             dynamicUrl = '../IA_Listview/IA_Listview.html?module=' + module + '&savedexam=yes';
-
             event.target.href = dynamicUrl;
             window.location.href = dynamicUrl;
         } else {
@@ -152,7 +147,6 @@ function getData(event) {
         incorrect = parseInt(document.getElementById('incorrect' + event.target.id).value);
         miss = parseInt(document.getElementById('miss' + event.target.id).value);
         total = correct + incorrect + miss;
-
 
         question.push(
             {
@@ -199,16 +193,31 @@ function saveexam(event) {
                 correct += element.correct;
             });
 
-            if (correct < 16) { band = 0; }
-            else if (correct >= 16 && correct <= 17) { band = 5; }
-            else if (correct >= 18 && correct <= 22) { band = 5.5; }
-            else if (correct >= 23 && correct <= 25) { band = 6; }
-            else if (correct >= 26 && correct <= 29) { band = 6.5 }
-            else if (correct >= 30 && correct <= 31) { band = 7; }
-            else if (correct >= 32 && correct <= 34) { band = 7.5; }
-            else if (correct >= 35 && correct <= 36) { band = 8; }
-            else if (correct >= 37 && correct <= 38) { band = 8.5 }
-            else if (correct >= 39 && correct <= 40) { band = 9; }
+            if (user_data.type == 'general' && module == 'Reading') {
+                if (correct >= 15 && correct <= 18) { band = 4; }
+                else if (correct >= 19 && correct <= 22) { band = 4.5; }
+                else if (correct >= 23 && correct <= 26) { band = 5; }
+                else if (correct >= 27 && correct <= 29) { band = 5.5; }
+                else if (correct >= 30 && correct <= 31) { band = 6; }
+                else if (correct >= 32 && correct <= 33) { band = 6.5; }
+                else if (correct >= 34 && correct <= 35) { band = 7; }
+                else if (correct == 36) { band = 7.5; }
+                else if (correct >= 37 && correct <= 38) { band = 8; }
+                else if (correct == 39) { band = 8.5 }
+                else if (correct == 40) { band = 9; }
+            } else {
+                if (correct >= 10 && correct <= 12) { band = 4; }
+                else if (correct >= 13 && correct <= 15) { band = 4.5; }
+                else if (correct >= 16 && correct <= 17) { band = 5; }
+                else if (correct >= 18 && correct <= 22) { band = 5.5; }
+                else if (correct >= 23 && correct <= 25) { band = 6; }
+                else if (correct >= 26 && correct <= 29) { band = 6.5 }
+                else if (correct >= 30 && correct <= 31) { band = 7; }
+                else if (correct >= 32 && correct <= 34) { band = 7.5; }
+                else if (correct >= 35 && correct <= 36) { band = 8; }
+                else if (correct >= 37 && correct <= 38) { band = 8.5 }
+                else if (correct >= 39 && correct <= 40) { band = 9; }
+            }
 
             question.forEach(element => {
                 element.band = band;

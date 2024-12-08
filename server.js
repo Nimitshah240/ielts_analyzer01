@@ -32,35 +32,35 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(cors());
 
-app.post('/logindata', (req, res) => {
-    const receivedData = req.body;
-    let query = 'SELECT * FROM user WHERE id = ' + receivedData.user_id;
-    let res_len;
+app.get('/api/checkUser', (req, res) => {
+    const user_id = req.query.user_id;
+    let query = `SELECT * FROM user WHERE id = ${user_id}`;
 
     connection.execute(query, (error, results, fields) => {
         if (error) {
             console.error(error);
         } else {
-            res_len = results.length
+            res.json(results);
         }
-        if (res_len == 1) {
-            query = 'UPDATE user SET ll_date = ? WHERE id = ?';
-            connection.execute(query, [receivedData.ll_date, receivedData.user_id], (error, results, fields) => {
-                if (error) {
-                    console.error(error);
-                } else {
-                    res.json(receivedData);
-                }
-            });
+    });
+});
+
+app.post('/api/updateUserData', (req, res) => {
+    const receivedData = req.body;
+    console.log(req.body);
+    console.log(receivedData);
+    
+    if (receivedData.new) {
+        console.log('New');
+        query = ` INSERT INTO user(id, name, lastname, number, type, privacy,email,location, fl_date, picture) VALUES ('${receivedData.user_id}','${receivedData.firstname}','${receivedData.lastname}','${receivedData.number}','${receivedData.type}','${receivedData.privacy}','${receivedData.email}','${receivedData.location}','${receivedData.fl_date}','${receivedData.picture}')`;
+    } else {
+        query = `UPDATE user SET name = '${receivedData.firstname}', lastname = '${receivedData.lastname}', number = '${receivedData.number}', type = '${receivedData.type}', privacy = '${receivedData.privacy}', email = '${receivedData.email}', location = '${receivedData.location}', fl_date = '${receivedData.fl_date}', picture = '${receivedData.picture}' WHERE id = ${receivedData.user_id}`;
+    }
+    connection.execute(query, (error, results, fields) => {
+        if (error) {
+            console.error(error);
         } else {
-            query = 'INSERT INTO user (id, name, email,location, fl_date, ll_date, picture) VALUES (\'' + receivedData.user_id + '\',\'' + receivedData.name + '\',\'' + receivedData.email + '\',\'' + receivedData.location + '\', \'' + receivedData.fl_date + '\',\'' + receivedData.ll_date + '\',\'' + receivedData.picture + '\')';
-            connection.execute(query, (error, results, fields) => {
-                if (error) {
-                    console.error(error);
-                } else {
-                    res.json(receivedData);
-                }
-            });
+            res.json(receivedData);
         }
     });
 });
