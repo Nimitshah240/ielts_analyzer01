@@ -9,9 +9,8 @@
     <script src='./IA_Trick.js'></script>
     <link rel='stylesheet' href='./IA_Trick.css'>
     <script src='./IA_Question.js'></script>
-    <script src='../index.js'></script>
+    <script src='../IA_Authentication/IA_Authentication.js'></script>
     <script src='../IA_Toast/IA_Toast.js'></script>
-    <script src='../signin.js'></script>
     <link rel='stylesheet' href='../IA_Toast/IA_Toast.css'>
 </head>
 
@@ -34,9 +33,9 @@
             </div>
             <div class="details">
                 <a class="navbartransition" href="../index.html">Home</a>
-                <i class="fa fa-google g-icon" id="not-log" style="font-size: 30px;" onclick="sigin()"
+                <i class="fa fa-user" id="not-log" style="font-size: 30px;" onclick="authentication(event)"
                     aria-hidden="true"></i>
-                <img id="login-img" class="login-img" onclick="signout(event)" />
+                <img id="login-img" class="login-img" onclick="authentication(event)" />
             </div>
         </div>
         <div class="body-section">

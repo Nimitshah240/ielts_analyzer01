@@ -1,0 +1,137 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ielts Analyzer</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='./IA_Authentication.js'></script>
+    <script src='../IA_Toast/IA_Toast.js'></script>
+    <link rel='stylesheet' href='../IA_Toast/IA_Toast.css'>
+    <link rel='stylesheet' href='./IA_Authentication.css'>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+</head>
+
+<body onload="connectedCallback(event)">
+
+    <!-- Spinner -->
+    <iframe src="./IA_Spinner/IA_Spinner.html" id="spinner" class="spinner" frameborder="0"></iframe>
+    <!-- Spinner -->
+    <!-- Toast -->
+    <ul class="notifications" id="notifications"> </ul>
+    <!-- Toast -->
+
+    <main id="main">
+        <div class="header glass">
+            <div class="logo">
+                <h1 class="companylogo"> IELTS <span style="color: #106eea;">Analyzer.</span></h1>
+                <h5 class="descrip">Score more than 8 bands</h5>
+            </div>
+            <div class="details">
+                <a class=" navbartransition" href="../index.html">Home</a>
+            </div>
+        </div>
+
+        <div class="body_section">
+            <!-- Signin div -->
+            <div class="validation-box-signin glass" id="validation-box-signin">
+                <div class="validation-box-header-signin">
+                    Sign In
+                </div>
+                <div class="validation-box-body-signin">
+                    <div class="inputdata">
+                        <p><span style="color: red;">*</span> First Name : </p>
+                        <input type="text" id="firstname" placeholder="First Name" class="inputbox">
+                    </div>
+                    <div class="inputdata">
+                        <p> Last Name : </p>
+                        <input type="text" id="lastname" placeholder="Last Name" class="inputbox">
+                    </div>
+                    <div class="inputdata">
+                        <p><span style="color: red;">*</span> Email : </p>
+                        <input type="email" id="email" placeholder="Email" class="inputbox">
+                    </div>
+                    <div class="inputdata">
+                        <p> <span style="color: red;">*</span> Number :</p>
+                        <input type="number" id="number" placeholder="Phone number" class="inputbox">
+                    </div>
+                    <div class="radio">
+                        <input type="radio" name="type" id="Academic" checked> Academic
+                        <input type="radio" name="type" id="General"> General
+                    </div>
+                    <div class="">
+                        <span style="color: red;">* </span><input type="checkbox" id="privacy"
+                            onclick="privacycheck(event)" required> Privacy Policy
+                    </div>
+                </div>
+                <div class="validation-box-footer-signin">
+                    <button class="gsi-material-button button-63 button" onclick="googleSignin()" id="google-button">
+                        <div class="gsi-material-button-state"></div>
+                        <div class="gsi-material-button-content-wrapper">
+                            <div class="gsi-material-button-icon">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;">
+                                    <path fill="#EA4335"
+                                        d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z">
+                                    </path>
+                                    <path fill="#4285F4"
+                                        d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z">
+                                    </path>
+                                    <path fill="#FBBC05"
+                                        d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z">
+                                    </path>
+                                    <path fill="#34A853"
+                                        d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z">
+                                    </path>
+                                    <path fill="none" d="M0 0h48v48H0z"></path>
+                                </svg>
+                            </div>
+                            <span class="gsi-material-button-contents">Sign in with Google</span>
+                            <span style="display: none;">Sign in with Google</span>
+                        </div>
+                    </button>
+                    <button class="button-63 button" onclick="continueClick(event)" id="continue">Continue</button>
+                    <button class="button-63 button" onclick="showSignout(event)" id="signout">Sign Out</button>
+
+                </div>
+            </div>
+
+            <!-- Signout div -->
+            <div class="validation-box-signout glass" id="validation-box-signout">
+                <div class="validation-box-header-signout">
+                    Sign Out
+                </div>
+                <div class="validation-box-body-signout">
+                    Are you sure, Do you want to signout?
+                </div>
+                <div class="validation-box-footer-signout">
+                    <button class="button-63 button" onclick="Signout(event)" id="yes">Yes</button>
+                    <button class="button-63 button" onclick="Signout(event)" id="no">No</button>
+                </div>
+            </div>
+        </div>
+
+        <div class=" footer">
+            <div class="copyright">
+                © Copyright Nimit Shah. All Rights Reserved.
+            </div>
+            <div class="contact-icons">
+                <a href="mailto:nimitshah240@gmail.com">
+                    <i class="fa fa-envelope-o contact-icon" aria-hidden="true"></i>
+                </a>
+                <a href="https://wa.me/6353756701">
+                    <i class="fa fa-whatsapp contact-icon" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.instagram.com/_nimittt_3000_/">
+                    <i class="fa fa-instagram contact-icon" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/nimit-shah-4623411b8/">
+                    <i class="fa fa-linkedin contact-icon" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

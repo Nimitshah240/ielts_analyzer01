@@ -7,15 +7,14 @@
     <link rel='stylesheet' href='./IA_Listview.css'>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src='../index.js'></script>
+    <script src='../IA_Authentication/IA_Authentication.js'></script>
     <script src='./IA_Listview.js'></script>
-    <script src='../signin.js'></script>
     <script src='../IA_Toast/IA_Toast.js'></script>
     <link rel='stylesheet' href='../IA_Toast/IA_Toast.css'>
     <link rel='stylesheet' href='../IA_Delete/IA_Delete.css'>
 </head>
 
-<body onload="connectedCallback()">
+<body onload="listviewconnectedCallback()">
     <div class="circle1"></div>
     <div class="circle2"></div>
 
@@ -56,11 +55,12 @@
                 <h5 class="descrip">Score more than 8 bands</h5>
             </div>
             <div class="details">
-                <a class="navbartransition" href="#" onclick="setHref(event)">New</a>
+                <button class="button-63 tip-open-button" onclick="setHref(event)">New</button>
+                <!-- <a class="navbartransition " href="#" onclick="setHref(event)">New</a> -->
                 <a class="navbartransition" href="../index.html">Home</a>
-                <i class="fa fa-google g-icon" id="not-log" style="font-size: 30px;" onclick="sigin()"
+                <i class="fa fa-user" id="not-log" style="font-size: 30px;" onclick="authentication(event)"
                     aria-hidden="true"></i>
-                <img id="login-img" class="login-img" onclick="signout(event)" />
+                <img id="login-img" class="login-img" onclick="authentication(event)" />
             </div>
         </div>
 

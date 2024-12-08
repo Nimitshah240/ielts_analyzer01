@@ -10,10 +10,7 @@ async function connectedCallbackTrick(event) {
         button.style.pointerEvents = "none";
         question_type = question(module);
         question_change();
-        
-        signincheck(() => {
-            fetchUserData();
-        });
+        Userlogo();
 
     } catch (error) {
         console.error(error);

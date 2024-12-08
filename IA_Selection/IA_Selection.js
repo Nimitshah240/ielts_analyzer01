@@ -1,14 +1,12 @@
 let dynamicUrl;
 const urlSearchParams = new URLSearchParams(window.location.search);
-const type = urlSearchParams.get('type');
-function connectedCallback(event) {
-    try {
-        signincheck(() => {
-            fetchUserData();
-        });
+const selectionType = urlSearchParams.get('type');
 
+function selectionconnectedCallback(params) {
+    try {
+        Userlogo();
     } catch (error) {
-        createToast('error', 'Error while loading: ' + error.message);
+        console.log(error);
     }
 }
 
@@ -16,11 +14,11 @@ function setHrefs(event) {
     try {
         let module = event.target.id;
 
-        if (type == 'dashboard') {
+        if (selectionType == 'dashboard') {
             dynamicUrl = '../IA_Dashboard/IA_Dashboard.html';
-        } else if (type == 'data') {
+        } else if (selectionType == 'data') {
             dynamicUrl = '../IA_Listview/IA_Listview.html';
-        } else if (type == 'trick') {
+        } else if (selectionType == 'trick') {
             dynamicUrl = '../IA_Trick/IA_Trick.html';
         }
         if (module == 'Reading') {

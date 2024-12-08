@@ -36,35 +36,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+var examdata;
 
-async function connectedCallback(event) {
+function indexconnectedCallback(event) {
     try {
-        createToast('error', 'Website is currently underdevelopment.');
-        signincheck(() => {
-            fetchUserData();
-        });
+        Userlogo();
+        if (JSON.parse(localStorage.getItem('user_data')) != null ) {
+            fetchExamData();// Control api callout
+        }
+        
     } catch (error) {
         createToast('error', 'Error while loading : ' + error.message);
     }
 }
 
-async function fetchUserData() {
-    try {
-
-        const data = JSON.parse(localStorage.getItem('user_data'));
-        if (data) {
-            document.getElementById('not-log').style.display = 'none';
-            document.getElementById('login-img').style.display = 'block';
-            document.getElementById('login-img').setAttribute('src', data.picture);
-            if (document.getElementById("listening-band")) {
-                fetchExamData();
-            }
-        }
-
-    } catch (error) {
-        createToast('error', 'Error while fetching user data : ' + error.message);
-    }
-}
 
 async function fetchExamData() {
     try {
@@ -82,7 +67,6 @@ async function fetchExamData() {
         fetch(`https://ieltsanalyzer.up.railway.app/api/examdata?user_id=${user_id}&module=${module}`)
             .then(response => response.json())
             .then(responseData => {
-
                 responseData.forEach(element => {
                     exammap.set(element.exam_id, { 'band': element.band, 'module': element.module });
                     if (element.module == 'Reading' && element.id != null) {
@@ -109,10 +93,10 @@ async function fetchExamData() {
                 document.getElementById("count-listening").innerHTML = listening_exam_count + ' Exam';
                 document.getElementById("count-reading").innerHTML = reading_exam_count + ' Exam';
             })
-            .catch(error => createToast('error', 'Error while fetching exam data : ' + error.message));
+            .catch(error => createToast('error', 'Error while fetching exam data : ' + error));
 
     } catch (error) {
-        createToast('error', 'Error while fetching exam data : ' + error.message);
+        createToast('error', 'Error while fetching exam data : ' + error);
     }
 }
 

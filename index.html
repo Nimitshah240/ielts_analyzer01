@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src='./index.js'></script>
-    <script src='../signin.js'></script>
+    <script src='./IA_Authentication/IA_Authentication.js'></script>
     <script src='./IA_Toast/IA_Toast.js'></script>
     <link rel='stylesheet' href='./IA_Toast/IA_Toast.css'>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 
-<body onload="connectedCallback(event)">
+<body onload="indexconnectedCallback(event)">
     <div class="circle1"></div>
     <div class="circle2"></div>
     <div class="circle3"></div>
@@ -38,9 +38,8 @@
             <div class="details">
                 <a class="navbartransition" href="#overview">Overall</a>
                 <a class="navbartransition" href="#contact">Contact Us</a>
-                <i class="fa fa-google g-icon" id="not-log" style="font-size: 30px;" onclick="sigin()"
-                    aria-hidden="true"></i>
-                <img id="login-img" class="login-img" onclick="signout(event)" />
+                <i class="fa fa-user" id="not-log" style="font-size: 30px;" onclick="authentication(event)" aria-hidden="true"></i>
+                <img id="login-img" class="login-img" onclick="authentication(event)" />
             </div>
         </div>
         <div class="body-section">
@@ -146,7 +145,8 @@
                 <div class="contact-form">
                     <input type="text" placeholder="Name*" class="text-field" id="name">
                     <input type="email" placeholder="Email*" class="text-field" id="email">
-                    <textarea type="text-area" placeholder="Type your message here" class="desc-field" id="message"></textarea>
+                    <textarea type="text-area" placeholder="Type your message here" class="desc-field"
+                        id="message"></textarea>
                     <button class="button-63 send-button" onclick="sendemail(event)" role="button"
                         id="data">Send</button>
 

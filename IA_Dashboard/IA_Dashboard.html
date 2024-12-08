@@ -7,15 +7,14 @@
     <link rel='stylesheet' href='./IA_Dashboard.css'>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src='../index.js'></script>
     <script src='./IA_Dashboard.js'></script>
-    <script src='../signin.js'></script>
+    <script src='../IA_Authentication/IA_Authentication.js'></script>
     <script src='../IA_Toast/IA_Toast.js'></script>
     <link rel='stylesheet' href='../IA_Toast/IA_Toast.css'>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<body onload="connectedCallback()">
+<body onload="dashboardconnectedCallback()">
 
     <!-- Spinner -->
     <iframe src="../IA_Spinner/IA_Spinner.html" id="spinner" class="spinner" frameborder="0"></iframe>
@@ -33,9 +32,9 @@
             <div class="details">
                 <button class="button-63 tip-open-button" onclick="tipopen(event)">TIP</button>
                 <a class=" navbartransition" href="../index.html">Home</a>
-                <i class="fa fa-google g-icon" id="not-log" style="font-size: 30px;" onclick="sigin()"
+                <i class="fa fa-user" id="not-log" style="font-size: 30px;" onclick="authentication(event)"
                     aria-hidden="true"></i>
-                <img id="login-img" class="login-img" onclick="signout(event)" />
+                <img id="login-img" class="login-img" onclick="authentication(event)" />
             </div>
         </div>
         <div class="body_section">

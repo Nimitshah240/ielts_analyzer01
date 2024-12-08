@@ -3,18 +3,16 @@ const module = urlSearchParams.get('module');
 var savedexam = urlSearchParams.get('savedexam')
 var question;
 var exam;
-let data = [];
+let examdata = [];
 var del_exam_id = '';
 
-function connectedCallback() {
+function listviewconnectedCallback() {
+    Userlogo();
     if (savedexam == 'yes') {
         createToast('success', 'Exam has been saved');
-        window.history.pushState({}, document.title, `/IA_Listview/IA_Listview.html?module=${module}`);
+        window.history.pushState({}, document.title, `/IA_Code/IA_Listview/IA_Listview.html?module=${module}`);
     }
-    signincheck(() => {
-        examData();
-        fetchUserData();
-    });
+    examData();// need to call once
 
 }
 function setHref(event) {
@@ -55,6 +53,7 @@ function examData() {
             .then(responseData => {
                 question = responseData;
                 if (question.length > 0) {
+
                     const Section1 = new Map();
                     const Section2 = new Map();
                     const Section3 = new Map();
@@ -102,7 +101,7 @@ function examData() {
 
                     // Arranging Data in Variable
                     for (const key of Exammap.keys()) {
-                        data.push({
+                        examdata.push({
                             'exam_id': key,
                             'exam_name': Exammap.get(key).Name,
                             'date': new Date(Exammap.get(key).Date).toISOString().split('T')[0],
@@ -118,7 +117,7 @@ function examData() {
                     }
 
                     //Setting data to html
-                    data.forEach((element, index) => {
+                    examdata.forEach((element, index) => {
                         htmldata +=
                             '<div class="data" id=' + element.exam_id + '>' +
                             '<div class="column index" onclick="openexam(event)" id=' + element.exam_id + '>' + (index + 1) + '</div>' +
@@ -173,14 +172,14 @@ function del(event) {
 
                     const divToRemove = document.getElementById(del_exam_id);
                     divToRemove.remove();
-                    data.forEach((element, i) => {
+                    examdata.forEach((element, i) => {
                         if (element.exam_id == del_exam_id) {
-                            data.splice(i, 1);
+                            examdata.splice(i, 1);
                         }
                     });
 
                     let htmldata = '';
-                    data.forEach((element, index) => {
+                    examdata.forEach((element, index) => {
                         htmldata +=
                             '<div class="data" id=' + element.exam_id + '>' +
                             '<div class="column index" onclick="openexam(event)" id=' + element.exam_id + '>' + (index + 1) + '</div>' +
