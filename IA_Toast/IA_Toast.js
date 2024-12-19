@@ -8,6 +8,7 @@ const toastDetails = {
     error: {
         icon: 'fa fa-times-circle',
     },
+    
     warning: {
         icon: 'fa fa-exclamation-circle',
     },
